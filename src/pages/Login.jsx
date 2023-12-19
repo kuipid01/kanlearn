@@ -22,7 +22,7 @@ const Login = () => {
     <div className="w-full relative rounded-r-3xl bg-primary-light   flex h-screen">
       <AiOutlineArrowLeft
         onClick={() => navigate(-1)}
-        className="absolute cursor-pointer z-30 text-2xl text-gray-50 left-5 top-5"
+        className="absolute cursor-pointer z-30 text-2xl text-gray-700 md:text-gray-50 left-5 top-5"
       />
       <div className="hidden md:flex w-1/3 relative h-full text-white p-4 ">
         <motion.h1
