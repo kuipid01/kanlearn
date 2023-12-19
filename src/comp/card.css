@@ -1,6 +1,6 @@
 .card{
      width: calc(33.3333% - 20px);
-     
+     cursor: pointer;
 }
 
 

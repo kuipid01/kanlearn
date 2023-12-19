@@ -11,15 +11,15 @@ const Card = ({item}) => {
       amount: .2, once:true
     });
     const textAnim = {
-        initial: {
-         opacity:0,
-        x:-10
-        },
-        animate: {
-           x:0,
-          opacity: 1,
-        },
-      };
+      initial: {
+       opacity:0,
+      x:-30
+      },
+      animate: {
+         x:0,
+        opacity: 1,
+      },
+    };
       const imgAnim = {
         initial: {
           clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",

@@ -23,14 +23,14 @@ export const Nav = ({srollState,setMenu,menu}) => (
     </div>
     <div className="hidden md:flex  gap-5  uppercase">
       <Link
-        className="px-5 hover:text-[#ffffff] hover: rounded-md py-2 border border-[#613F75]"
-        to=""
+        className="px-5 hover:text-[#ffffff] hover:bg-[#613F75] hover: rounded-md py-2 border border-[#613F75]"
+        to="/join"
       >
         Sign Up
       </Link>
       <Link
         className="px-5 hover:border transition-all hover:bg-white hover:text-[#613F75] hover:border-[#613F75] rounded-md text-white bg-[#613F75] py-2 "
-        to=""
+        to="/login"
       >
         Sign In
       </Link>
