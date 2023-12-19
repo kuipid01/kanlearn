@@ -98,7 +98,7 @@ const Home = () => {
             ref={divRef}
             className="flex mt-[10vh]  flex-col md:flex-row w-[90%] mx-auto  md:h-screen justify-between items-center h-fit"
           >
-            <div className="flex  w-full md:w-[50%] justify-center items-center h-[80vh] md:h-fit  gap-10 flex-col">
+            <div className="flex  w-full md:w-[50%] justify-center items-center  h-[60vh] md:h-fit  gap-10 flex-col">
               {" "}
               <motion.div
                 initial={{
@@ -121,7 +121,7 @@ const Home = () => {
                   duration: .7,
                   type: "linear",
                 }}
-                className=""
+               
               >
                 <h1 className="text-[35px] leading-[100%] font-[400] md:text-[50px]">
                   Get one-on-one tutorials from experts
