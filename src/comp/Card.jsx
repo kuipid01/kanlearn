@@ -71,9 +71,7 @@ const Card = ({item}) => {
             type: "linear",
             delay:.5
           }} className=' w-[95%] text-3xl'>{title} </motion.h1>
-        <div  style={{
-            boxShadow:'0px 4px 5px 0px rgba(0,0,0,0.35)'
-        }} className='items-center px-3 pb-3 flex justify-between w-full text-purple-500 text-sm font-bold'>
+        <div   className='items-center  flex justify-between w-full text-purple-500 text-sm font-bold'>
             <div className='py-1 px-2 bg-purple-200  flex items-center gap-2  rounded-lg' >
             <IoMdBook />
             <span>20 courses</span>   

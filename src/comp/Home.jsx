@@ -2,11 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Btn, TranslateButton } from "./Button";
 import "./home.css";
-import { motion, useInView, useMotionValueEvent } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useMotionValueEvent,
+} from "framer-motion";
 import { useScroll } from "framer-motion";
 import { useTransform } from "framer-motion";
 import Offer from "./Offer";
 import Popular from "./Popular";
+import Footer from "./Footer";
+import { Nav } from "./Nav";
 //lg - 50p
 //sm - 20p
 //esm - 15p
@@ -20,6 +27,7 @@ const Home = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const [srollState, setSrollState] = useState(true);
+  const [menu, setMenu] = useState(false);
   const handleScroll = () => {
     setScrollY(window.scrollY);
   };
@@ -82,40 +90,8 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <nav
-        className={`  fixed w-full px-8 z-30  duration-200 ease-linear transition   mx-auto h-[10vh]  items-center flex justify-between  ${
-          srollState ? "bg-white" : "bg-transparent"
-        }  ${srollState ? "shadow" : ""}`}
-      >
-        <div className="logo font-bold border-b-2 border-[#613F75] text-[20px] md:text-[25px] uppercase">
-          {" "}
-          <img src="" alt="" /> Kanlearn
-        </div>
-        <div className="md:flex h-full text-[#613F75] font-medium  items-center uppercase gap-3 hidden w-/4">
-          <TranslateButton text="Home" width={100} height={40} />
-
-          <TranslateButton text="About" width={100} height={40} />
-
-          <TranslateButton text="Videos" width={100} height={40} />
-
-          <TranslateButton text="Teahers" width={100} height={40} />
-        </div>
-        <div className="hidden sm:flex  gap-5  uppercase">
-          <Link
-            className="px-5 hover:text-[#ffffff] hover: rounded-md py-2 border border-[#613F75]"
-            to=""
-          >
-            Sign Up
-          </Link>
-          <Link
-            className="px-5 hover:border transition-all hover:bg-white hover:text-[#613F75] hover:border-[#613F75] rounded-md text-white bg-[#613F75] py-2 "
-            to=""
-          >
-            Sign In
-          </Link>
-        </div>
-      </nav>
+    <div className="relative">
+      <Nav setMenu={setMenu} menu={menu} srollState={srollState} />
       <div className=" flex flex-col gap-[150px]">
         <div className="  min-h-screen h-fit flex justify-center items-center  w-full   bg-no-repeat bg-center bg-cover brightness-90 ">
           <section
@@ -346,7 +322,7 @@ const Home = () => {
         </div>
         <Offer />
         <Popular />
-        <div></div>
+        <Footer />
       </div>
 
       {/* <motion.div
@@ -413,6 +389,92 @@ const Home = () => {
           <div className="w-full  h-[60px] flex justify-center items-center"> text 1 </div>
         </motion.div>
       </div> */}
+      <AnimatePresence mode="wait">
+        {menu && (
+          <motion.ul
+            initial={{
+              top: "-20vh",
+              opacity: 0,
+            }}
+            animate={{
+              top: "10vh",
+              opacity: 1,
+            }}
+            exit={{
+              top: "-20vh",
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="fixed right-0 top-[10vh] text-gray-200 h-fit p-3 bg-black"
+          >
+            <motion.li
+              initial={{
+                x: -20,
+                opacity: 0,
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+              }}
+              exit={{
+                x: -20,
+                opacity: 0,
+              }}
+              transition={{
+                duration: 0.5,
+                delay: 0.3,
+              }}
+              className="px-10 mb-2 py-2"
+            >
+              About
+            </motion.li>
+            <motion.li
+              initial={{
+                x: -20,
+                opacity: 0,
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+              }}
+              exit={{
+                x: -20,
+                opacity: 0,
+              }}
+              transition={{
+                duration: 0.5,
+                delay: 0.5,
+              }}
+              className="px-10 mb-2 py-2"
+            >
+              Videos
+            </motion.li>
+            <motion.li
+              initial={{
+                x: -20,
+                opacity: 0,
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+              }}
+              exit={{
+                x: -20,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.5,
+                delay: 0.7,
+              }}
+              className="px-10 mb-2 py-2"
+            >
+              Teachers
+            </motion.li>
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
