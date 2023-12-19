@@ -118,7 +118,7 @@ const Home = () => {
                     : {}
                 }
                 transition={{
-                  duration: 1.5,
+                  duration: .7,
                   type: "linear",
                 }}
                 className=""
@@ -147,8 +147,8 @@ const Home = () => {
                     : {}
                 }
                 transition={{
-                  duration: 1,
-                  delay: 1,
+                  duration: .7,
+                  delay: .2,
                   type: "linear",
                 }}
                 className="text-[18px] text-gray-900 font-[300]"
@@ -177,8 +177,8 @@ const Home = () => {
                     : {}
                 }
                 transition={{
-                  duration: 1,
-                  delay: 1.2,
+                  duration: .7,
+                  delay: .3,
                   type: "linear",
                 }}
                 className="flex w-full gap-5 "
@@ -219,8 +219,8 @@ const Home = () => {
                   : {}
               }
               transition={{
-                duration: 1,
-                delay: 2.1,
+                duration: .5,
+                delay: .5,
                 type: "linear",
               }}
               className="img relative w-full md:w-[40%] h-[60vh] md:h-[80%] mx-auto flex "
@@ -246,8 +246,8 @@ const Home = () => {
                       : {}
                   }
                   transition={{
-                    duration: 1,
-                    delay: 2.7,
+                    duration: .7,
+                    delay: .7,
                     type: "linear",
                   }}
                   className="w-full h-full  object-cover z-10   "
@@ -278,8 +278,8 @@ const Home = () => {
                       : {}
                   }
                   transition={{
-                    duration: 1,
-                    delay: 2.5,
+                    duration: .7,
+                    delay: .9,
                     type: "linear",
                   }}
                   className="w-full h-full object-cover z-20"
@@ -308,8 +308,8 @@ const Home = () => {
                       : {}
                   }
                   transition={{
-                    duration: 1,
-                    delay: 2.3,
+                    duration: .7,
+                    delay: 1.1,
                     // ease: "ease-in-out", // Add an easing function
                   }}
                   className="w-full  h-full object-cover "
