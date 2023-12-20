@@ -1,0 +1,5 @@
+@media (min-width: 765px) and (max-width: 1008px) {
+    nav .btn{
+        display: none;
+    }
+  }

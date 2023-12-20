@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useAuth } from "../utils/AuthContext";
 const Login = () => {
+  const {user, loginUser,loginUserUsingGoogle} = useAuth()
+  const loginForm = useRef(null)
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -18,6 +21,16 @@ const Login = () => {
       opacity: 1,
     },
   };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const email = loginForm.current.email.value
+    const password = loginForm.current.password.value
+    
+    const userInfo = {email, password}
+
+    loginUser(userInfo)
+  }
+
   return (
     <div className="w-full relative rounded-r-3xl bg-primary-light   flex h-screen">
       <AiOutlineArrowLeft
@@ -58,7 +71,7 @@ const Login = () => {
         <div className="md:w-[60%] w-[90%] gap-4  flex flex-col h-full justify-center items-start ">
           <h1 className=" text-3xl font-bold">Welome back </h1>
           <div className=" w-full flex gap-3">
-            <div className=" font-light cursor-pointer border p-1 md:p-2 flex gap-3 items-center flex-1">
+            <div onClick={  loginUserUsingGoogle} className=" font-light cursor-pointer border p-1 md:p-2 flex gap-3 items-center flex-1">
               <img src="/go.png" alt="" />
               <span className=" text-[12px] md:text-lg capitalize">
                 Sign in with google
@@ -72,7 +85,7 @@ const Login = () => {
               </span>
             </div>
           </div>
-          <form className=" w-full flex flex-col gap-4">
+          <form onSubmit={handleSubmit} ref={loginForm} className=" w-full flex flex-col gap-4">
             <motion.input
               variants={textAnim}
               initial="initial"
@@ -81,6 +94,7 @@ const Login = () => {
                 duration: 1,
                 type: "linear",
               }}
+              name="email"
               type="email"
               className="w-full outline-none border-b border-gray-400 py-3"
               placeholder="Email"
@@ -94,6 +108,7 @@ const Login = () => {
                   duration: 1,
                   type: "linear",
                 }}
+                name="password"
                 type={showPassword ? "text" : "password"}
                 className="w-full outline-none border-b border-gray-400 py-3"
                 placeholder="Password"
