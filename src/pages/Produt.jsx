@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaPlay } from 'react-icons/fa'
+import { CiCircleCheck } from 'react-icons/ci'
 const Produt = () => {
   const produtDetails = {
     category: 'Tech',
@@ -28,9 +29,13 @@ const Produt = () => {
   const perentageOff = Math.round(
     ((produtDetails.price - produtDetails.newPrice) / produtDetails.price) * 100
   )
-  console.log(perentageOff)
+  const boxStyle = {
+    width: `calc(50% - 10px)`,
+    // Add other inline styles as needed
+  }
+
   return (
-    <div className="page relative min-h-screen">
+    <div className="page relative pb-[12vh] min-h-screen">
       <div className=" flex  mt-2 justify-center flex-col gap-2 w-full p-4 h-fit min-h-[50vh] bg-primary-light text-white">
         <div className=" w-[95%] sm:w-4/5 flex gap-3 flex-col mx-auto">
           <div className=" text-gray-300">
@@ -54,10 +59,11 @@ const Produt = () => {
               <FaPlay className=" text-2xl text-white" />
             </div>
           </div>
-        
 
           <div className="title">
-            <h1 className=" font-bold text-xl sm:text-2xl md:text-3xl ">{produtDetails.title}</h1>
+            <h1 className=" font-bold text-xl sm:text-2xl md:text-3xl ">
+              {produtDetails.title}
+            </h1>
           </div>
           <p className=" font-light text-lg">{produtDetails.desc}</p>
           <div className="star items-center flex gap-1">
@@ -159,7 +165,112 @@ const Produt = () => {
           </button>
         </div>
       </div>
-      <div className="bottom-0 lg:hidden  flex px-2 shadow-2xl border-t border-gray-600  bg-primary-light shadow-black h-[10vh] w-full justify-between items-center fixed">
+      <section className="w-[95%] sm:w-4/5 flex gap-3 flex-col mx-auto">
+        <div className=" border  p-6 min-h-[30vh] my-10  lg:w-4/6">
+          <div className="  rounded   w-full flex flex-col">
+            <h1 className=" font-bold text-xl">
+              What you would learn from the video
+            </h1>
+
+            <div className="flex justify-between flex-wrap gap-[10px]">
+              <div style={boxStyle} className=" flex items-start gap-1 mt-5">
+                <div className=" w-4 h-4  rounded-full flex justify-center items-center">
+                  <CiCircleCheck />
+                </div>
+                <span className="text-xs">
+                  Create your own successful YouTube channel
+                </span>
+              </div>
+              <div style={boxStyle} className=" flex items-start gap-1 mt-5">
+                <div className=" w-4 h-4  rounded-full flex justify-center items-center">
+                  <CiCircleCheck />
+                </div>
+                <span className="text-xs">
+                  Create your own successful YouTube channel
+                </span>
+              </div>
+              <div style={boxStyle} className=" flex items-start gap-1 mt-5">
+                <div className=" w-4 h-4  rounded-full flex justify-center items-center">
+                  <CiCircleCheck />
+                </div>
+                <span className="text-xs">
+                  Create your own successful YouTube channel
+                </span>
+              </div>
+              <div style={boxStyle} className=" flex items-start gap-1 mt-5">
+                <div className=" w-4 h-4  rounded-full flex justify-center items-center">
+                  <CiCircleCheck />
+                </div>
+                <span className="text-xs">
+                  Create your own successful YouTube channel
+                </span>
+              </div>
+              <div style={boxStyle} className=" flex items-start gap-1 mt-5">
+                <div className=" w-4 h-4  rounded-full flex justify-center items-center">
+                  <CiCircleCheck />
+                </div>
+                <span className="text-xs">
+                  Create your own successful YouTube channel
+                </span>
+              </div>
+              <div style={boxStyle} className=" flex items-start gap-1 mt-5">
+                <div className=" w-4 h-4  rounded-full flex justify-center items-center">
+                  <CiCircleCheck />
+                </div>
+                <span className="text-xs whitespace-normal">
+                  Create clickable thumbnails that get more views that get more
+                  views
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="desc ">
+          <h1 className=" font-bold text-xl">Description</h1>
+
+          <p className=" font-normal mt-3 leading-7 tracking-wide text-[15px] ">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+            voluptates quidem, ex corporis ullam, sunt consectetur est
+            reiciendis saepe deleniti dolor cum quibusdam eaque necessitatibus
+            quo architecto temporibus at perferendis. Nesciunt, officiis quasi
+            repellat fugiat officia voluptatem, blanditiis sunt inventore nulla
+            perferendis, quae facilis consequuntur! Enim necessitatibus
+            aspernatur itaque modi corrupti laudantium impedit rem neque
+            similique obcaecati animi libero nisi, quo accusamus ipsum totam
+            odio dolores expedita commodi aliquam esse nostrum. Dicta blanditiis
+            quia non delectus nulla impedit quam eius perspiciatis id? Sint at
+            autem nesciunt quasi corrupti dolorum in? Voluptates in aperiam
+            mollitia debitis accusamus ullam minima cumque fugiat!
+          </p>
+        </div>
+        <div className="desc mt-10">
+          <h1 className=" font-bold text-xl">Review</h1>
+
+          <div className=" w-full h-fit flex p-6 mt-3 flex-col border">
+            <div className="h-20 flex gap-2">
+              <div className=" w-20 h-full">
+                <img
+                  className=" h-full w-full rounded-full object-cover"
+                  src="/s.jpg"
+                  alt=""
+                />
+              </div>
+              <div className=" flex flex-col justify-between">
+                <h1 className=" font-bold ">Sunday Rajab</h1>
+                <p className=" text-sm font-light">4 courses</p>
+                <p className=" text-sm font-light">5 Reviews</p>
+              </div>
+            </div>
+            <p className=" font-normal mt-3 leading-7 tracking-wide text-[15px] ">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Praesentium reiciendis maxime odio, molestias voluptatibus
+              laudantium quos fuga asperiores eum id corporis dignissimos ipsa
+              tempora incidunt ab, eveniet sed, amet laboriosam.CCCC
+            </p>
+          </div>
+        </div>
+      </section>
+      <div className="bottom-0 lg:hidden mt-11  flex px-2 shadow-2xl border-t border-gray-600  bg-primary-light shadow-black h-[10vh] w-full justify-between items-center fixed">
         <div className=" hidden sm:flex sm:flex-col">
           <div className="title text-white font-normal">
             <h1 className="  text-lg">{produtDetails.title}</h1>
