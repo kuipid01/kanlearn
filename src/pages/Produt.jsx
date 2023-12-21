@@ -32,7 +32,7 @@ const Produt = () => {
   return (
     <div className="page relative min-h-screen">
       <div className=" flex  mt-2 justify-center flex-col gap-2 w-full p-4 h-fit min-h-[50vh] bg-primary-light text-white">
-        <div className=" w-4/5 flex gap-3 flex-col mx-auto">
+        <div className=" w-[95%] sm:w-4/5 flex gap-3 flex-col mx-auto">
           <div className=" text-gray-300">
             <span className=" font-bold cursor-pointer text-purple-300 ">
               {' '}
@@ -110,10 +110,7 @@ const Produt = () => {
             </span>
           </div>
           <div className=" mt-8 flex gap-2 items-center w-full ">
-            <h1 className=" text-4xl font-bold">
-              {' '}
-              #{produtDetails.newPrice}{' '}
-            </h1>
+            <h1 className=" text-4xl font-bold"> #{produtDetails.newPrice} </h1>
             <span className=" font-extralight line-through">
               {' '}
               {produtDetails.price}{' '}
@@ -126,7 +123,7 @@ const Produt = () => {
           </button>
         </div>
       </div>
-      <div className="banner flex-col hidden xl:flex absolute right-7 min-h-[500px] pb-4 border shadow-xl w-80 p-1 bg-white top-28">
+      <div className="banner flex-col hidden lg:flex absolute right-7 min-h-[500px] pb-4 border shadow-xl w-80 p-1 bg-white top-28">
         <div className=" w-full h-fit relative">
           <img
             src="/student1.jpg"
@@ -152,12 +149,37 @@ const Produt = () => {
           </button>
           <button className=" transition-all hover:bg-gray-200 w-full h-11 border border-black mt-3 bg-white  text-black">
             {' '}
-            Add To Cart{' '}
+           Buy Now{' '}
           </button>
         </div>
       </div>
-      <div className="bottom-0 xl:hidden  bg-primary-light h-12 w-full justify-between items-center fixed">
-
+      <div className="bottom-0 lg:hidden  flex px-2 shadow-2xl border-t border-gray-600  bg-primary-light shadow-black h-[10vh] w-full justify-between items-center fixed">
+        <div className=' hidden sm:flex sm:flex-col'>
+          <div className="title text-white font-normal">
+            <h1 className="  text-lg">{produtDetails.title}</h1>
+          </div>
+          <div className=" flex text-white items-center gap-2">
+            <span className=" text-[#FFF501] "> {fixedNumber} </span>
+            <img src="/filledStar.png" alt="" />
+            <span className=" text-sm underline text-gray-200 ">
+              {' '}
+              {produtDetails.totalstars} ratings
+            </span>
+          </div>
+        </div>
+        <div className=' w-full sm:w-fit flex justify-center h-full gap-5 items-center'>
+          <div className=' h-4/5 flex flex-col justify-between text-white'>
+            <h1 className=" text-lg font-bold"> #{produtDetails.newPrice} </h1>
+            <p className=" font-extralight line-through">
+              {' '}
+              {produtDetails.price}{' '}
+            </p>
+          </div>
+          <button className="flex-1 sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
+            {' '}
+           Buy Now{' '}
+          </button>
+        </div>
       </div>
     </div>
   )
