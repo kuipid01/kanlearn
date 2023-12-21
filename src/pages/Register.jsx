@@ -40,7 +40,7 @@ const Register = () => {
 }
 
   return (
-    <div className="w-full relative rounded-r-3xl bg-primary-light   flex h-[120vh]">
+    <div className="w-full relative rounded-r-3xl bg-primary-light   flex h-screen">
            <AiOutlineArrowLeft  onClick={() => navigate(-1)} className="absolute cursor-pointer z-30 text-2xl text-gray-700 md:text-gray-50  left-5 top-5" />
       <div className="hidden md:flex w-1/3 relative h-full text-white p-4 ">
         <motion.h1
@@ -73,18 +73,18 @@ const Register = () => {
         />
       </div>
       <div className="flex flex-col h-full justify-center items-center  bg-white shadow-lg flex-1  md:rounded-l-3xl">
-        <div className="md:w-[60%] w-[90%] gap-4  flex flex-col h-full justify-center items-start ">
+        <div className="md:w-[70%] w-[90%] gap-4  flex flex-col h-full justify-center items-start ">
           <h1 className=" font-bold">Create Account</h1>
           <div className=" w-full flex gap-3">
             <div onClick={  loginUserUsingGoogle} className=" font-light cursor-pointer border p-1 xl:p-2 flex gap-3 items-center flex-1">
               <img src="/go.png" alt="" />
-              <span className=" text--+[12px]  xl:text-lg capitalize">
+              <span className=" text-[12px]  xl:text-lg capitalize">
                 Sign Up with google
               </span>
             </div>
-            <div className="font-light cursor-pointer border p-1 xl:p-2 flex gap-3 items-center flex-1">
+            <div className=" font-light  cursor-pointer border p-1 xl:p-2 flex gap-3 items-center flex-1">
               <img src="/face.png" alt="" />
-              <span className='text-[12px]  xl:text-lg capitalize'>
+              <span className=' text-[11px]  xl:text-lg capitalize'>
                 {" "}
                 Sign Up with facebook
               </span>

@@ -5,7 +5,7 @@ const Spin = () => {
     <div className="ontainer fixed top-0  left-0 flex justify-center items-center">
       <div class="col-sm-2">
         <div class="sp sp-wave"></div>
-        <h5>Wave</h5>
+    
       </div>
     </div>
   );
