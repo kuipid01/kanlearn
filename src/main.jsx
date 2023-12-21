@@ -64,6 +64,7 @@ const router = createBrowserRouter([
     path: '/course/:id',
     element: (
       <AuthProvider>
+         <ScrollRestoration />
         <Nav />
         <Produt />
       </AuthProvider>
