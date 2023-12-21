@@ -33,23 +33,10 @@ export const Btn = ({ text, bg, width, height, mainpage }) => {
           animate={{
             d: `${
               animatey
-                ? `
-              M0 15
-              Q${width / 2} -10 ${width} 15
-              L${width} ${height + 20}
-              Q${width / 2} ${height + 20} 0 ${height + 20} 
-              LO ${height + 20}
-
-              
-            `
-                : `  M0 15
-                Q${width / 2} -10 ${width} 15
-                L${width} ${height + 20 }
-                Q${width / 2} ${height + 40} 0 ${height + 20} 
-                LO ${height}
-  
-    `
+                ? `M0 15 Q${width / 2} -10 ${width} 15 L${width} ${height + 20} Q${width / 2} ${height + 20} 0 ${height + 20} L0 ${height + 20}`
+                : `M0 15 Q${width / 2} -10 ${width} 15 L${width} ${height + 20} Q${width / 2} ${height + 40} 0 ${height + 20} L0 ${height}`
             }`,
+            
           }}
           transition={{
             duration: 0.5,
