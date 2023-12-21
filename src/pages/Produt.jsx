@@ -126,7 +126,7 @@ const Produt = () => {
           </button>
         </div>
       </div>
-      <div className="banner hidden xl:flex absolute right-7 min-h-[500px] pb-4 border shadow-xl w-80 p-1 bg-white top-28">
+      <div className="banner flex-col hidden xl:flex absolute right-7 min-h-[500px] pb-4 border shadow-xl w-80 p-1 bg-white top-28">
         <div className=" w-full h-fit relative">
           <img
             src="/student1.jpg"
@@ -156,7 +156,7 @@ const Produt = () => {
           </button>
         </div>
       </div>
-      <div className="bottom-0 justify-between items-center fixed">
+      <div className="bottom-0 xl:hidden  bg-primary-light h-12 w-full justify-between items-center fixed">
 
       </div>
     </div>
