@@ -44,14 +44,20 @@ const Produt = () => {
               {produtDetails.subategory}{' '}
             </span>
           </div>
-          <img
-            className=" sm:w-full h-[400px] object-cover lg:hidden"
-            src="/student1.jpg"
-            alt=""
-          />
+          <div className="mt-2 relative sm:w-full h-[300px] sm:h-[400px] object-cover lg:hidden">
+            <img
+              className=" w-full h-full object-cover "
+              src="/student1.jpg"
+              alt=""
+            />
+            <div className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2">
+              <FaPlay className=" text-2xl text-white" />
+            </div>
+          </div>
+        
 
           <div className="title">
-            <h1 className=" font-bold text-3xl">{produtDetails.title}</h1>
+            <h1 className=" font-bold text-xl sm:text-2xl md:text-3xl ">{produtDetails.title}</h1>
           </div>
           <p className=" font-light text-lg">{produtDetails.desc}</p>
           <div className="star items-center flex gap-1">
@@ -149,12 +155,12 @@ const Produt = () => {
           </button>
           <button className=" transition-all hover:bg-gray-200 w-full h-11 border border-black mt-3 bg-white  text-black">
             {' '}
-           Buy Now{' '}
+            Buy Now{' '}
           </button>
         </div>
       </div>
       <div className="bottom-0 lg:hidden  flex px-2 shadow-2xl border-t border-gray-600  bg-primary-light shadow-black h-[10vh] w-full justify-between items-center fixed">
-        <div className=' hidden sm:flex sm:flex-col'>
+        <div className=" hidden sm:flex sm:flex-col">
           <div className="title text-white font-normal">
             <h1 className="  text-lg">{produtDetails.title}</h1>
           </div>
@@ -167,8 +173,8 @@ const Produt = () => {
             </span>
           </div>
         </div>
-        <div className=' w-full sm:w-fit flex justify-center h-full gap-5 items-center'>
-          <div className=' h-4/5 flex flex-col justify-between text-white'>
+        <div className=" w-full sm:w-fit flex justify-center h-full gap-5 items-center">
+          <div className=" h-4/5 flex flex-col justify-between text-white">
             <h1 className=" text-lg font-bold"> #{produtDetails.newPrice} </h1>
             <p className=" font-extralight line-through">
               {' '}
@@ -177,7 +183,7 @@ const Produt = () => {
           </div>
           <button className="flex-1 sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
             {' '}
-           Buy Now{' '}
+            Buy Now{' '}
           </button>
         </div>
       </div>
