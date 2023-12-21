@@ -14,10 +14,12 @@ import Offer from "./Offer";
 import Popular from "./Popular";
 import Footer from "./Footer";
 import { Nav } from "./Nav";
+import { useAuth } from "../utils/AuthContext";
 //lg - 50p
 //sm - 20p
 //esm - 15p
 const Home = () => {
+  const { user, logoutUser } = useAuth();
   const divRef = useRef(null);
   const isInView = useInView(divRef, {
     amount: 0.2,
@@ -409,6 +411,7 @@ const Home = () => {
             className="fixed right-0 top-[10vh] text-gray-200 h-fit p-3 bg-black"
           >
             <motion.li
+            onClick={() => setMenu(!menu)}
               initial={{
                 x: -20,
                 opacity: 0,
@@ -430,6 +433,7 @@ const Home = () => {
               About
             </motion.li>
             <motion.li
+             onClick={() => setMenu(!menu)}
               initial={{
                 x: -20,
                 opacity: 0,
@@ -451,6 +455,7 @@ const Home = () => {
               Videos
             </motion.li>
             <motion.li
+             onClick={() => setMenu(!menu)}
               initial={{
                 x: -20,
                 opacity: 0,
@@ -471,55 +476,86 @@ const Home = () => {
             >
               Teachers
             </motion.li>
-            <motion.li
-              initial={{
-                x: -20,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              exit={{
-                x: -20,
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.5,
-                delay: 0.9,
-              }}
-              className="px-10 mb-2 py-2"
-            >
-              <Link className="" to="/join">
-                Sign Up
-              </Link>
-            </motion.li>
-            <motion.li
-              initial={{
-                x: -20,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              exit={{
-                x: -20,
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.5,
-                delay: 1.1,
-              }}
-              className="px-10 mb-2 py-2"
-            >
-              <Link
-                className=""
-                to="/login"
+            {!user && (
+              <motion.li
+              onClick={() => setMenu(!menu)}
+                initial={{
+                  x: -20,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  x: -20,
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.9,
+                }}
+                className="px-10  border-t border-gray-700 mb-2 py-2"
               >
-                Sign In
-              </Link>
-            </motion.li>
+                <Link className="" to="/join">
+                  Sign Up
+                </Link>
+              </motion.li>
+            )}
+            {!user && (
+              <motion.li
+              onClick={() => setMenu(!menu)}
+                initial={{
+                  x: -20,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  x: -20,
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 1.1,
+                }}
+                className="px-10 mb-2 py-2"
+              >
+                <Link className="" to="/login">
+                  Sign In
+                </Link>
+              </motion.li>
+            )}
+            {user && (
+              <motion.li
+              onClick={() => setMenu(!menu)}
+                initial={{
+                  x: -20,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  x: -20,
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 1.1,
+                }}
+                className="px-10 border-t border-gray-700 mb-2 py-2"
+              >
+                <Link
+                  onClick={logoutUser}
+                >
+                  Logout
+                </Link>
+              </motion.li>
+            )}
           </motion.ul>
         )}
       </AnimatePresence>

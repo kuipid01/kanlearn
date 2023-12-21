@@ -3,8 +3,8 @@ import "./spin.css";
 const Spin = () => {
   return (
     <div className="ontainer fixed top-0  left-0 flex justify-center items-center">
-      <div class="col-sm-2">
-        <div class="sp sp-wave"></div>
+      <div className="col-sm-2">
+        <div className="sp sp-wave"></div>
     
       </div>
     </div>

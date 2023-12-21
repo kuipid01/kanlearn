@@ -25,7 +25,7 @@ export const Nav = ({ srollState, setMenu, menu }) => {
 
         <TranslateButton text="Teachers" width={100} height={40} />
       </div>
-      <div className="hidden md:flex  gap-5  uppercase">
+      <div className="hidden lg:flex  gap-5  uppercase">
         {!user ? (
           <>
             <Link
