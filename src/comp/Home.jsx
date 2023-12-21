@@ -29,7 +29,7 @@ const Home = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const [srollState, setSrollState] = useState(true);
-  const [menu, setMenu] = useState(false);
+
   const handleScroll = () => {
     setScrollY(window.scrollY);
   };
@@ -93,7 +93,7 @@ const Home = () => {
 
   return (
     <div className="relative">
-      <Nav setMenu={setMenu} menu={menu} srollState={srollState} />
+      <Nav  srollState={srollState} />
       <div className=" flex flex-col gap-[150px]">
         <div className="  min-h-screen h-fit flex justify-center items-center  w-full   bg-no-repeat bg-center bg-cover brightness-90 ">
           <section
@@ -390,176 +390,7 @@ const Home = () => {
           <div className="w-full  h-[60px] flex justify-center items-center"> text 1 </div>
         </motion.div>
       </div> */}
-      <AnimatePresence mode="wait">
-        {menu && (
-          <motion.ul
-            initial={{
-              top: "-20vh",
-              opacity: 0,
-            }}
-            animate={{
-              top: "10vh",
-              opacity: 1,
-            }}
-            exit={{
-              top: "-20vh",
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            className="fixed right-0 top-[10vh] text-gray-200 h-fit p-3 bg-black"
-          >
-            <motion.li
-            onClick={() => setMenu(!menu)}
-              initial={{
-                x: -20,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              exit={{
-                x: -20,
-                opacity: 0,
-              }}
-              transition={{
-                duration: 0.5,
-                delay: 0.3,
-              }}
-              className="px-10 mb-2 py-2"
-            >
-              About
-            </motion.li>
-            <motion.li
-             onClick={() => setMenu(!menu)}
-              initial={{
-                x: -20,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              exit={{
-                x: -20,
-                opacity: 0,
-              }}
-              transition={{
-                duration: 0.5,
-                delay: 0.5,
-              }}
-              className="px-10 mb-2 py-2"
-            >
-              Videos
-            </motion.li>
-            <motion.li
-             onClick={() => setMenu(!menu)}
-              initial={{
-                x: -20,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              exit={{
-                x: -20,
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.5,
-                delay: 0.7,
-              }}
-              className="px-10 mb-2 py-2"
-            >
-              Teachers
-            </motion.li>
-            {!user && (
-              <motion.li
-              onClick={() => setMenu(!menu)}
-                initial={{
-                  x: -20,
-                  opacity: 0,
-                }}
-                animate={{
-                  x: 0,
-                  opacity: 1,
-                }}
-                exit={{
-                  x: -20,
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.9,
-                }}
-                className="px-10  border-t border-gray-700 mb-2 py-2"
-              >
-                <Link className="" to="/join">
-                  Sign Up
-                </Link>
-              </motion.li>
-            )}
-            {!user && (
-              <motion.li
-              onClick={() => setMenu(!menu)}
-                initial={{
-                  x: -20,
-                  opacity: 0,
-                }}
-                animate={{
-                  x: 0,
-                  opacity: 1,
-                }}
-                exit={{
-                  x: -20,
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: 1.1,
-                }}
-                className="px-10 mb-2 py-2"
-              >
-                <Link className="" to="/login">
-                  Sign In
-                </Link>
-              </motion.li>
-            )}
-            {user && (
-              <motion.li
-              onClick={() => {
-                setMenu(!menu);
-                logoutUser();
-              }}
-                initial={{
-                  x: -20,
-                  opacity: 0,
-                }}
-                animate={{
-                  x: 0,
-                  opacity: 1,
-                }}
-                exit={{
-                  x: -20,
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: 1.1,
-                }}
-                className="px-10 cursor-pointer border-t border-gray-700 mb-2 py-2"
-              >
-               
-                  Logout
-            
-              </motion.li>
-            )}
-          </motion.ul>
-        )}
-      </AnimatePresence>
+      
     </div>
   );
 };

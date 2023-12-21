@@ -3,7 +3,7 @@ import {motion} from 'framer-motion'
 const Menu = ({setMenu,menu}) => {
 
   return (
-    <div onClick={ () => setMenu(!menu)} className='flex lg:hidden cursor-pointer flex flex-col gap-1'>
+    <div onClick={ () => setMenu(!menu)} className=' lg:hidden cursor-pointer flex flex-col gap-1'>
         <motion.img  animate={ menu ? {
             rotate:40,
             translateY:6

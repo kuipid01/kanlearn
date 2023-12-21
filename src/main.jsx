@@ -20,8 +20,9 @@ import Produt from './pages/Produt.jsx'
 const Layout = () => {
   return (
     <div>
+       <ScrollRestoration />
       <AuthProvider>
-        <ScrollRestoration />
+       
         <Nav />
         <Outlet />
         <Footer />
