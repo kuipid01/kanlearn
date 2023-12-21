@@ -174,14 +174,14 @@ const Produt = () => {
           </div>
         </div>
         <div className=" w-full sm:w-fit flex justify-center h-full gap-5 items-center">
-          <div className=" h-4/5 flex flex-col justify-between text-white">
-            <h1 className=" text-lg font-bold"> #{produtDetails.newPrice} </h1>
+          <div className=" px-4 sm:px-0  h-4/5 flex flex-col justify-between text-white">
+            <h1 className=" text-xl font-bold"> #{produtDetails.newPrice} </h1>
             <p className=" font-extralight line-through">
               {' '}
               {produtDetails.price}{' '}
             </p>
           </div>
-          <button className="flex-1 sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
+          <button className="flex-1 font-bold sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
             {' '}
             Buy Now{' '}
           </button>
