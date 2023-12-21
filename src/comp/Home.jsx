@@ -530,7 +530,10 @@ const Home = () => {
             )}
             {user && (
               <motion.li
-              onClick={() => setMenu(!menu)}
+              onClick={() => {
+                setMenu(!menu);
+                logoutUser();
+              }}
                 initial={{
                   x: -20,
                   opacity: 0,
@@ -547,13 +550,11 @@ const Home = () => {
                   duration: 0.5,
                   delay: 1.1,
                 }}
-                className="px-10 border-t border-gray-700 mb-2 py-2"
+                className="px-10 cursor-pointer border-t border-gray-700 mb-2 py-2"
               >
-                <Link
-                  onClick={logoutUser}
-                >
+               
                   Logout
-                </Link>
+            
               </motion.li>
             )}
           </motion.ul>
