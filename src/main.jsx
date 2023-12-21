@@ -1,3 +1,4 @@
+
 import React from "react";
 
 import ReactDOM from "react-dom/client";
@@ -15,6 +16,7 @@ import { Nav } from "./comp/Nav.jsx";
 import Footer from "./comp/Footer.jsx";
 import Home from "./comp/Home.jsx";
 import { AuthProvider } from "./utils/AuthContext.jsx";
+import Produt from "./pages/Produt.jsx";
 
 const Layout = () => {
   return (
@@ -37,6 +39,11 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      
+  {
+    path: "/course/:id",
+    element:  <AuthProvider> <Produt /> </AuthProvider> ,
+  },
     ],
   },
 

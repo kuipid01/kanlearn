@@ -8,7 +8,7 @@ export const Nav = ({ srollState, setMenu, menu }) => {
 
   return (
     <nav
-      className={`  fixed w-full px-8 z-30  duration-200 ease-linear transition   mx-auto h-[10vh]  items-center flex justify-between  ${
+      className={` top-0  bg-white left-0  fixed w-full px-8 z-30  duration-200 ease-linear transition   mx-auto h-[10vh]  items-center flex justify-between  ${
         srollState ? "bg-white" : "bg-transparent"
       }  ${srollState ? "shadow" : ""}`}
     >
