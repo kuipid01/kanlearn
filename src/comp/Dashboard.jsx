@@ -7,9 +7,9 @@ const Dashboard = () => {
   console.log(user)
   return (
     <div className=' w-full'>
-      <div className="w-full  page min-h-screen bg-purple-200 ">
-        <div className="flex flex-col-reverse md:w-[80%] w-[95%] h-[80vh]  mx-auto  md:flex-row items-center gap-5 justify-between">
-          <div className="bg-[#fff] p-5 rounded-md">
+      <div className="w-full  page min-h-fit bg-purple-200 ">
+        <div className="flex flex-col-reverse md:w-[80%] w-[95%] h-fit py-10  mx-auto  md:flex-row items-center gap-5 justify-between">
+          <div className="md:bg-[#fff] p-5 rounded-md">
             <h1 className="text-4xl">
               <span className=" mr-4 text-primary-light uppercase font-medium">
                 Welcome
@@ -24,7 +24,7 @@ const Dashboard = () => {
             </p>
           </div>
 
-          <img className="w-5/6  md:w-1/2 h-[350px]" src="./image.svg" alt="" />
+          <img className="w-5/6 border md:w-1/2 h-[350px]" src="./image.svg" alt="" />
         </div>
       </div>
       <div className="flex mt-[100px]  gap-4 justify-center items-center">
