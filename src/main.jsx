@@ -6,6 +6,7 @@ import './index.css'
 import {
   createBrowserRouter,
   Outlet,
+  Route,
   RouterProvider,
   ScrollRestoration,
 } from 'react-router-dom'
@@ -14,15 +15,16 @@ import Register from './pages/Register.jsx'
 import { Nav } from './comp/Nav.jsx'
 import Footer from './comp/Footer.jsx'
 import Home from './comp/Home.jsx'
-import { AuthProvider } from './utils/AuthContext.jsx'
+import { AuthProvider, useAuth } from './utils/AuthContext.jsx'
 import Produt from './pages/Produt.jsx'
+import Add from './pages/Add.jsx'
+import { PrivateRoutes } from './comp/Private.jsx'
 
 const Layout = () => {
   return (
     <div>
-       <ScrollRestoration />
+      <ScrollRestoration />
       <AuthProvider>
-       
         <Nav />
         <Outlet />
         <Footer />
@@ -30,6 +32,7 @@ const Layout = () => {
     </div>
   )
 }
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -64,12 +67,16 @@ const router = createBrowserRouter([
     path: '/course/:id',
     element: (
       <AuthProvider>
-         <ScrollRestoration />
+        <ScrollRestoration />
         <Nav />
         <Produt />
       </AuthProvider>
     ),
   },
+  <Route element={<PrivateRoutes />}>
+    <Route path="/add" element={<Add />} />
+    {/* <Route path="/profile" element={<Profile />} /> */}
+  </Route>,
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

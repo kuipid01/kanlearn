@@ -105,6 +105,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

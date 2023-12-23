@@ -7,7 +7,7 @@ const Dashboard = () => {
   console.log(user)
   return (
     <div className=' w-full'>
-      <div className="w-full  page min-h-fit bg-purple-200 ">
+      <div className="w-full  pt-[10vh] min-h-fit bg-purple-200 ">
         <div className="flex flex-col-reverse md:w-[80%] w-[95%] h-fit py-10  mx-auto  md:flex-row items-center gap-5 justify-between">
           <div className="md:bg-[#fff] p-5 rounded-md">
             <h1 className="text-4xl">

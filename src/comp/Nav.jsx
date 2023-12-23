@@ -282,7 +282,7 @@ export const Nav = ({ srollState }) => {
               </motion.li>
             )}
             {user && (
-              <motion.li
+              <motion.button
                 onClick={() => {
                   setMenu(!menu)
                   logoutUser()
@@ -306,7 +306,7 @@ export const Nav = ({ srollState }) => {
                 className="px-10 cursor-pointer border-t border-gray-700 mb-2 py-2"
               >
                 Logout
-              </motion.li>
+              </motion.button>
             )}
           </motion.ul>
         )}
