@@ -6,7 +6,6 @@ import './index.css'
 import {
   createBrowserRouter,
   Outlet,
-  Route,
   RouterProvider,
   ScrollRestoration,
 } from 'react-router-dom'
@@ -21,10 +20,12 @@ import Add from './pages/Add.jsx'
 import { PrivateRoutes } from './comp/Private.jsx'
 
 const Layout = () => {
+  
   return (
     <div>
       <ScrollRestoration />
       <AuthProvider>
+ 
         <Nav />
         <Outlet />
         <Footer />
@@ -41,6 +42,19 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: '/add',
+        element: (
+          <>
+            <ScrollRestoration />
+            <AuthProvider>
+            <PrivateRoutes >
+              <Add />
+            </PrivateRoutes>
+            </AuthProvider>
+          </>
+        ),
       },
     ],
   },
@@ -73,10 +87,7 @@ const router = createBrowserRouter([
       </AuthProvider>
     ),
   },
-  <Route element={<PrivateRoutes />}>
-    <Route path="/add" element={<Add />} />
-    {/* <Route path="/profile" element={<Profile />} /> */}
-  </Route>,
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

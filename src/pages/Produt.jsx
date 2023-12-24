@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { CiCircleCheck } from 'react-icons/ci'
+import { useParams } from 'react-router-dom'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
 const Produt = () => {
+  const {id} = useParams()
+  const [video, setvideo] = useState()
+  const getVideoById = async () => {
+    try {
+      const videoRef = doc(db, 'videos', id);
+      const videoSnapshot = await getDoc(videoRef);
+  
+      if (videoSnapshot.exists()) {
+        const videoData = { id: videoSnapshot.id, ...videoSnapshot.data() };
+        console.log('Video Data:', videoData);
+        setvideo(videoData)
+        return videoData;
+      } else {
+        console.log('Video not found');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching video by ID:', error);
+      return null;
+    }
+  };
+useEffect(() => {
+  getVideoById()
+}, [])
+  
   const produtDetails = {
     category: 'Tech',
     subategory: 'React',
@@ -62,10 +90,10 @@ const Produt = () => {
 
           <div className="title">
             <h1 className=" font-bold text-xl sm:text-2xl md:text-3xl ">
-              {produtDetails.title}
+              {video?.title}
             </h1>
           </div>
-          <p className=" font-light text-lg">{produtDetails.desc}</p>
+          <p className=" font-light text-lg">{video?.desc}</p>
           <div className="star items-center flex gap-1">
             <span className=" text-[#FFF501] "> {fixedNumber} </span>
             <>
