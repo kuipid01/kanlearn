@@ -4,9 +4,12 @@ import { CiCircleCheck } from 'react-icons/ci'
 import { useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
+import Player from '../comp/Player'
 const Produt = () => {
   const { id } = useParams()
   const [video, setvideo] = useState()
+  const [playing, setPlaying] = useState(false)
+  console.log(playing)
   const getVideoById = async () => {
     try {
       const videoRef = doc(db, 'videos', id)
@@ -85,9 +88,9 @@ const Produt = () => {
               src={video?.imageUrl}
               alt=""
             />
-            <div className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2">
-              <FaPlay className=" text-2xl text-white" />
-            </div>
+            <div onClick={() => setPlaying(true)} className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2">
+            <FaPlay className=" text-2xl text-white" />
+          </div>
           </div>
 
           <div className="title">
@@ -95,7 +98,7 @@ const Produt = () => {
               {video?.title}
             </h1>
           </div>
-          <p className=" font-light max-w-[70%] text-gray-300 text-lg">{video?.desc}</p>
+          <p className=" font-light lg:max-w-[70%] text-gray-300 text-lg">{video?.desc}</p>
           <div className="star items-center flex gap-1">
             <span className=" text-[#FFF501] "> {fixedNumber} </span>
             <>
@@ -174,16 +177,17 @@ const Produt = () => {
           </button>
         </div>
       </div>
-      <div className="banner flex-col hidden lg:flex absolute right-7 min-h-[500px] pb-4 border shadow-xl w-80 p-1 bg-white top-28">
+      <div className="banner  border-gray-500 flex-col hidden lg:flex absolute right-7 min-h-[500px] pb-4 border-2 shadow-xl w-80 p-1 bg-white top-28">
         <div className=" w-full h-fit relative">
           <img
             src={video?.imageUrl}
             className="w-full h-[300px]  object-cover "
             alt=""
           />
-          <div className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2">
+          <div onClick={() => setPlaying(true)} className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2">
             <FaPlay className=" text-2xl text-white" />
           </div>
+          
         </div>
         <div className="p-2 mt-2 flex gap-2 items-center w-full justify-center">
           <h1 className=" text-4xl font-medium"> #{produtDetails.newPrice} </h1>
@@ -292,6 +296,9 @@ const Produt = () => {
           </button>
         </div>
       </div>
+      {
+        playing && video && <Player title={video.title} setPlaying={setPlaying} url={video.vidUrl} />
+      }
     </div>
   )
 }
