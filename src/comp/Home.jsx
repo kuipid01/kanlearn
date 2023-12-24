@@ -23,22 +23,22 @@ import Landingpage from './Landingpage'
 const Home = () => {
   const { user, logoutUser } = useAuth()
 
-  
   const [srollState] = useState(true)
-
 
   return (
     <div className="relative">
       <Nav srollState={srollState} />
       <div className=" flex flex-col gap-[150px]">
-      {!user ? (
-        <div className="  min-h-screen h-fit flex justify-center items-center  w-full   ">
-         
-           <Landingpage/>
-          
-        </div> ) : <Dashboard/> }
-       { !user && <Offer />}
-        <Popular />
+        {!user ? (
+          <div className="  min-h-screen h-fit flex justify-center items-center  w-full   ">
+            <Landingpage />
+          </div>
+        ) : (
+          <Dashboard />
+        )}
+        {!user && <Offer />}
+        {!user && <Popular />}
+
         <Footer />
       </div>
 

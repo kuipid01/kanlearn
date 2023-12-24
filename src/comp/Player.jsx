@@ -15,7 +15,7 @@ const Player = ({ url, title, setPlaying }) => {
       />
       <p>{title}</p>
       <div className="flex bg-red-300 w-[400px] h-[400px]">
-        <video className="w-full h-full" controls playbackRate={speed} autoPlay src={url}></video>
+        <video className="w-full h-full" controls playbackrate={speed} autoPlay src={url}></video>
       </div>
       <div className=' items-center flex gap-3'>
         <label>Playback Speed: {speed}x</label>

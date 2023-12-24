@@ -18,6 +18,8 @@ import { AuthProvider, useAuth } from './utils/AuthContext.jsx'
 import Produt from './pages/Produt.jsx'
 import Add from './pages/Add.jsx'
 import { PrivateRoutes } from './comp/Private.jsx'
+import { Toaster } from './@/components/ui/toaster.jsx'
+import Edit from './pages/Edit.jsx'
 
 const Layout = () => {
   
@@ -25,7 +27,7 @@ const Layout = () => {
     <div>
       <ScrollRestoration />
       <AuthProvider>
- 
+      <Toaster />
         <Nav />
         <Outlet />
         <Footer />
@@ -51,6 +53,19 @@ const router = createBrowserRouter([
             <AuthProvider>
             <PrivateRoutes >
               <Add />
+            </PrivateRoutes>
+            </AuthProvider>
+          </>
+        ),
+      },
+      {
+        path: '/edit/:id',
+        element: (
+          <>
+            <ScrollRestoration />
+            <AuthProvider>
+            <PrivateRoutes >
+              <Edit />
             </PrivateRoutes>
             </AuthProvider>
           </>

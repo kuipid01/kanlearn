@@ -12,15 +12,21 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
+import { useToast } from '@/@/components/ui/use-toast'
+
 
 const Add = () => {
-  const {user} = useAuth()
+  const { toast } = useToast()
+  const { user } = useAuth()
   const navigate = useNavigate()
   const perkInputRef = useRef(null)
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState('')
   const [perks, setPerks] = useState([])
   const [thumbnail, setThumbnail] = useState(null)
+  const [thumbnailPreview, setThumbnailPreview] = useState(null) // New state for thumbnail preview
+  const [videoPreview, setVideoPreview] = useState(null) // New state for thumbnail preview
+
   const [videoFile, setVideoFile] = useState(null)
   const [video, setVideo] = useState({
     title: '',
@@ -30,7 +36,6 @@ const Add = () => {
     imageUrl: '',
     importance: [],
     vidUrl: '',
-   
   })
 
   const addPerk = () => {
@@ -48,32 +53,58 @@ const Add = () => {
   // console.log(video)
 
   const handleThumbnailChange = (e) => {
-    setThumbnail(e.target.files[0])
-    if (file) {
-      // Read the selected file and create a data URL
-      const reader = new FileReader();
+    const file = e.target.files[0]
 
-      reader.onloadend = () => {
-        setThumbnail(file);
-        setVideo((prevVideo) => ({
-          ...prevVideo,
-          imageUrlPreview: reader.result, // Store the preview URL in the state
-        }));
-      };
+    // Set the thumbnail file
+    setThumbnail(file)
 
-      reader.readAsDataURL(file); // Read the file as a data URL
+    // Display a preview of the thumbnail
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      setThumbnailPreview(reader.result)
     }
+    reader.readAsDataURL(file)
   }
 
   const handleVideoFileChange = (e) => {
-    setVideoFile(e.target.files[0])
+    const file = e.target.files[0]
+
+    // Set the thumbnail file
+    setVideoFile(file)
+
+    // Display a preview of the thumbnail
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      setVideoPreview(reader.result)
+    }
+    reader.readAsDataURL(file)
   }
   const storage = getStorage()
-  const storageRef = ref(storage, 'images/')
-  const storageRefVid = ref(storage, 'videos/')
-
+  const timestamp = new Date().getTime();
+  const storageRef = ref(
+    storage,
+    `images/${timestamp}_${thumbnail && thumbnail.name.replace(/\s/g, '')}`
+  );
+  
+  const storageRefVid = ref(
+    storage,
+    `videos/${timestamp}_${videoFile && videoFile.name.replace(/\s/g, '')}`
+  );
+  
+console.log(thumbnail?.name.replace(/\s/g, ''))
   const handleSubmit = async (e) => {
     e.preventDefault()
+    // Check if all fields are filled
+    if (
+      video.desc === '' ||
+      video.title === '' ||
+      video.importance.length <= 0 ||
+      videoFile === null ||
+      thumbnail === null
+    ) {
+      alert('Fill in all fields and ensure to add a thumbnail and a video')
+      return ;
+    }
 
     try {
       setLoading(true)
@@ -132,37 +163,46 @@ const Add = () => {
       const videoUrl = await getDownloadURL(videoUploadTask.snapshot.ref)
 
       // Add video details to Firestore
-      await addDoc(collection(db, 'videos'), {
-        ...video,
-        imageUrl: thumbnailUrl,
-        vidUrl: videoUrl,
-        user:user.uid,
-        creator:user.displayName,
-        newPrice:0,
-        tags:[],
-        totalTimesRated:0,
-      })
-
-      //  Reset form state
-      setVideo({
-        title: '',
-        desc: '',
-        price: '',
-        longdesc: '',
-        imageUrl: '',
-        importance: [],
-        vidUrl: '',
+       await addDoc(collection(db, 'videos'), {
+         ...video,
+         imageUrl: thumbnailUrl,
+         vidUrl: videoUrl,
+         user: user.uid,
+         creator: user.displayName,
+         newPrice: 0,
+         tags: [],
+         totalTimesRated: 0,
+       }) 
       
-
+      toast({
+        title: "Video Added",
+        description: "Video Added Succesfully.",
       })
-      setPerks([])
-      setThumbnail(null)
-      setVideoFile(null)
-      setProgress('Video added successfully!')
-      navigate('/')
-      setLoading(false)
+    // Reset form state by creating a new video object
+    setVideo({
+      title: '',
+      desc: '',
+      price: '',
+      longdesc: '',
+      imageUrl: '',
+      importance: [],
+      vidUrl: '',
+    });
+    setPerks([]);
+    setThumbnail(null);
+    setThumbnailPreview(null)
+    setVideoPreview(null)
+    setVideoFile(null);
+    setProgress('Video added successfully!');
+     navigate('/');
+    setLoading(false);
     } catch (error) {
       setProgress('An error occured,Try again or contact help')
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      })
       setLoading(false)
       console.error('Error adding video:', error)
     }
@@ -189,8 +229,12 @@ const Add = () => {
         <h1 className="text-2xl">Add Tutorials</h1>
         {loading ? (
           <div className=" flex flex-col justify-center items-center gap-3 h-fit p-5 rounded-md border shadow-lg ">
-            <p className=' capitalize '>{progress}</p>
-            <img className='w-12 h-12 rounded-full transition-all'  src="/loading.svg" alt="" />
+            <p className=" capitalize ">{progress}</p>
+            <img
+              className="w-12 h-12 rounded-full transition-all"
+              src="/loading.svg"
+              alt=""
+            />
           </div>
         ) : (
           <form
@@ -229,7 +273,13 @@ const Add = () => {
                 type="file"
               />
             </div>
-
+            {thumbnailPreview && (
+              <img
+                className=" w-32 h-32 border"
+                src={thumbnailPreview}
+                alt=""
+              />
+            )}
             <input
               value={video.price}
               onChange={(e) => setVideo({ ...video, price: e.target.value })}
@@ -294,6 +344,10 @@ const Add = () => {
                 onChange={handleVideoFileChange}
               />
             </div>
+            {videoPreview && (
+              <video className=" w-32 h-32 border" src={videoPreview} alt="" />
+            )}
+
             <button
               type="submit"
               className="w-full rounded-[10px] bg-primary-light h-[60px] text-white font-bold"

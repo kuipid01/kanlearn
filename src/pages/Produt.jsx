@@ -200,7 +200,7 @@ const Produt = () => {
           </div>
         </div>
         <div className="p-2 mt-2 flex gap-2 items-center w-full justify-center">
-          <h1 className=" text-4xl font-medium"> #{produtDetails.newPrice} </h1>
+          <h1 className=" text-4xl font-medium"> #{video?.newPrice} </h1>
           <span className=" font-extralight line-through">
             {' '}
             {video?.price}{' '}
@@ -210,7 +210,7 @@ const Produt = () => {
             {Math.round(
               ((video?.price - video?.newPrice) / video?.price) * 100
             ) || 0}{' '}
-            % off % off{' '}
+            % off 
           </span>
         </div>
         {user?.uid === video?.user ? (
@@ -307,7 +307,7 @@ const Produt = () => {
         </div>
         {user?.uid === video?.user ? (
           <Link
-            className="text-white border py-4 border-white w-fit px-4 uppercase text-xl font-bold text-center"
+            className="text-white border py-2 border-white w-fit px-4 uppercase text-lg font-light text-center"
             to={`edit/${id}`}
           >
             {' '}

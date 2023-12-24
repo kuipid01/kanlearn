@@ -25,14 +25,14 @@ const Card = ({ item }) => {
   const imgAnim = {
     initial: {
       clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
-      x: 50,
+     
       opacity: 0,
       rotateZ: "2deg",
       x: -10,
     },
     animate: {
       clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0% 100%)",
-      x: 0,
+  
       rotateZ: "0deg",
       opacity: 1,
       x: 0,
