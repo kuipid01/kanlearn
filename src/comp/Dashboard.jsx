@@ -76,9 +76,9 @@ const Dashboard = () => {
           {data?.map((item, i) => (
             <Link className=' hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-fit md:w-1/4' key={item} to={`/course/${item?.id}`} >
                 <img className='h-[150px] w-full object-cover ' src={item?.imageUrl} alt="" />
-                <h1 className='text-xl text-gray-600'>{item?.title} fghjcoc ciwcw</h1>
-                <p>
-                  {item.desc}
+                <h1 className='text-base capitalize font-bold text-gray-900'>{item?.title} fghjcoc ciwcw</h1>
+                <p className='text-sm'>
+                  {item.desc.slice(0,100)}
                 </p>
             </Link >
           ))}

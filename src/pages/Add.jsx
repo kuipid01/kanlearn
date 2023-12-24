@@ -122,7 +122,11 @@ const Add = () => {
         ...video,
         imageUrl: thumbnailUrl,
         vidUrl: videoUrl,
-        user:user.uid
+        user:user.uid,
+        creator:user.displayName,
+        newPrice:0,
+        tags:[],
+        totalTimesRated:0,
       })
 
       //  Reset form state
@@ -134,6 +138,8 @@ const Add = () => {
         imageUrl: '',
         importance: [],
         vidUrl: '',
+      
+
       })
       setPerks([])
       setThumbnail(null)
@@ -146,6 +152,22 @@ const Add = () => {
       setLoading(false)
       console.error('Error adding video:', error)
     }
+  }
+  const produtDetails = {
+    category: 'Tech',
+    subategory: 'React',
+    title: 'Making react app tuturial on building ',
+    desc: 'omple tuturial on building your first react app',
+    totalstars: 10,
+    totalTimesRated: 3,
+    averageStars: null,
+    creator: 'stephen adegoke',
+    language: 'English',
+
+    scope: ['Be familiar with reat syntax ', 'Create apps that scales'],
+    courseImage: '',
+    price: 30000,
+    newPrice: 5000,
   }
   return (
     <div className="page min-h-screen h-fit pb-16 text-black">
