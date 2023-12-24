@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { CiCircleCheck } from 'react-icons/ci'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 import Player from '../comp/Player'
+import { useAuth } from '../utils/AuthContext'
 const Produt = () => {
+  const { user } = useAuth()
+
   const { id } = useParams()
   const [video, setvideo] = useState()
   const [playing, setPlaying] = useState(false)
-  console.log(playing)
+
   const getVideoById = async () => {
     try {
       const videoRef = doc(db, 'videos', id)
@@ -88,9 +91,12 @@ const Produt = () => {
               src={video?.imageUrl}
               alt=""
             />
-            <div onClick={() => setPlaying(true)} className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2">
-            <FaPlay className=" text-2xl text-white" />
-          </div>
+            <div
+              onClick={() => setPlaying(true)}
+              className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2"
+            >
+              <FaPlay className=" text-2xl text-white" />
+            </div>
           </div>
 
           <div className="title">
@@ -98,7 +104,9 @@ const Produt = () => {
               {video?.title}
             </h1>
           </div>
-          <p className=" font-light lg:max-w-[70%] text-gray-300 text-lg">{video?.desc}</p>
+          <p className=" font-light lg:max-w-[70%] text-gray-300 text-lg">
+            {video?.desc}
+          </p>
           <div className="star items-center flex gap-1">
             <span className=" text-[#FFF501] "> {fixedNumber} </span>
             <>
@@ -184,29 +192,47 @@ const Produt = () => {
             className="w-full h-[300px]  object-cover "
             alt=""
           />
-          <div onClick={() => setPlaying(true)} className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2">
+          <div
+            onClick={() => setPlaying(true)}
+            className=" cursor-pointer flex justify-center items-center w-20 h-20 rounded-full bg-primary-light absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2"
+          >
             <FaPlay className=" text-2xl text-white" />
           </div>
-          
         </div>
         <div className="p-2 mt-2 flex gap-2 items-center w-full justify-center">
           <h1 className=" text-4xl font-medium"> #{produtDetails.newPrice} </h1>
-          <span className=" font-extralight line-through"> {video?.price} </span>
-          <span className=" font-light">   {Math.round(
-                ((video?.price - video?.newPrice) / video?.price) * 100
-              ) || 0}{' '}
-              % off{' '} % off </span>
-        </div>
-        <div className=" w-full p-2 ">
-          <button className=" transition-all hover:bg-primary-light/80 w-full h-11 mt-3 bg-primary-light text-white text-center">
+          <span className=" font-extralight line-through">
             {' '}
-            Add To Cart{' '}
-          </button>
-          <button className=" transition-all hover:bg-gray-200 w-full h-11 border border-black mt-3 bg-white  text-black">
+            {video?.price}{' '}
+          </span>
+          <span className=" font-light">
             {' '}
-            Buy Now{' '}
-          </button>
+            {Math.round(
+              ((video?.price - video?.newPrice) / video?.price) * 100
+            ) || 0}{' '}
+            % off % off{' '}
+          </span>
         </div>
+        {user?.uid === video?.user ? (
+          <Link
+            className="text-white mt-6 bg-primary-light border py-4 border-white w-full  uppercase text-xl font-bold text-center"
+            to={`edit/${id}`}
+          >
+            {' '}
+            Edit{' '}
+          </Link>
+        ) : (
+          <div className=" w-full p-2 ">
+            <button className=" transition-all hover:bg-primary-light/80 w-full h-11 mt-3 bg-primary-light text-white text-center">
+              {' '}
+              Add To Cart{' '}
+            </button>
+            <button className=" transition-all hover:bg-gray-200 w-full h-11 border border-black mt-3 bg-white  text-black">
+              {' '}
+              Buy Now{' '}
+            </button>
+          </div>
+        )}
       </div>
       <section className="w-[95%] sm:w-4/5 flex gap-3 flex-col mx-auto">
         <div className=" border  p-6 min-h-[30vh] my-10  lg:w-4/6">
@@ -279,26 +305,40 @@ const Produt = () => {
             </span>
           </div>
         </div>
-        <div className=" w-full sm:w-fit flex justify-center h-full gap-5 items-center">
-          <div className=" px-4 sm:px-0  h-4/5 flex flex-col justify-between text-white">
-            <h1 className=" text-xl font-bold">
-              {' '}
-              #{video?.newPrice || 'Free'}{' '}
-            </h1>
-            <p className=" font-extralight line-through">
-              {' '}
-              {video?.price || 'Free'}{' '}
-            </p>
-          </div>
-          <button className="flex-1 font-bold sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
+        {user?.uid === video?.user ? (
+          <Link
+            className="text-white border py-4 border-white w-fit px-4 uppercase text-xl font-bold text-center"
+            to={`edit/${id}`}
+          >
             {' '}
-            Buy Now{' '}
-          </button>
-        </div>
+            Edit{' '}
+          </Link>
+        ) : (
+          <div className=" w-full sm:w-fit flex justify-center h-full gap-5 items-center">
+            <div className=" px-4 sm:px-0  h-4/5 flex flex-col justify-between text-white">
+              <h1 className=" text-xl font-bold">
+                {' '}
+                #{video?.newPrice || 'Free'}{' '}
+              </h1>
+              <p className=" font-extralight line-through">
+                {' '}
+                {video?.price || 'Free'}{' '}
+              </p>
+            </div>
+            <button className="flex-1 font-bold sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
+              {' '}
+              Buy Now{' '}
+            </button>
+          </div>
+        )}
       </div>
-      {
-        playing && video && <Player title={video.title} setPlaying={setPlaying} url={video.vidUrl} />
-      }
+      {playing && video && (
+        <Player
+          title={video.title}
+          setPlaying={setPlaying}
+          url={video.vidUrl}
+        />
+      )}
     </div>
   )
 }

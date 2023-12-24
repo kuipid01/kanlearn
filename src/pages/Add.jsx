@@ -49,6 +49,20 @@ const Add = () => {
 
   const handleThumbnailChange = (e) => {
     setThumbnail(e.target.files[0])
+    if (file) {
+      // Read the selected file and create a data URL
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setThumbnail(file);
+        setVideo((prevVideo) => ({
+          ...prevVideo,
+          imageUrlPreview: reader.result, // Store the preview URL in the state
+        }));
+      };
+
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
   }
 
   const handleVideoFileChange = (e) => {
@@ -75,7 +89,7 @@ const Add = () => {
               thumbnailSnapshot.totalBytes) *
             100
 
-          setProgress(`Image Upload is ${thumbnailProgress}% done`)
+          setProgress(`Image Upload is ${Math.floor(thumbnailProgress)}% done`)
         },
         (thumbnailError) => {
           // Handle thumbnail upload errors
@@ -102,7 +116,7 @@ const Add = () => {
           const videoProgress =
             (videoSnapshot.bytesTransferred / videoSnapshot.totalBytes) * 100
           console.log(`Video Upload is ${videoProgress}% done`)
-          setProgress(`Video Upload is ${videoProgress}% done`)
+          setProgress(`Video Upload is ${Math.floor(videoProgress)}% done`)
         },
         (videoError) => {
           //  Handle video upload errors
