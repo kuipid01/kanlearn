@@ -290,6 +290,7 @@ const Add = () => {
                 id="video"
                 className="w-full outline-primary-light h-full cursor-pointer hidden "
                 type="file"
+                accept="video/*"
                 onChange={handleVideoFileChange}
               />
             </div>
