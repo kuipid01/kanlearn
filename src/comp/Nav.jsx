@@ -34,9 +34,8 @@ export const Nav = ({ srollState }) => {
         <TranslateButton text="About" width={100} height={40} />
 
         <TranslateButton text="Videos" width={100} height={40} />
+      </div>
 
-        </div>
-    
       <div className="hidden lg:flex  gap-5  uppercase">
         {!user ? (
           <>
@@ -77,25 +76,25 @@ export const Nav = ({ srollState }) => {
           </div>
         )}
       </div>
-      <div className='flex gap-2 items-center'>
-      <div
-        onClick={() => setCartOpen(!cartOpen)}
-        className=" mr-5 lg:mr-0 cursor-pointer whitespace-nowrap relative flex gap-3
+      <div className="flex gap-2 items-center">
+        <div
+          onClick={() => setCartOpen(!cartOpen)}
+          className=" mr-5 lg:mr-0 cursor-pointer whitespace-nowrap relative flex gap-3
                         text-center   items-center  w-fit mb-2 py-2"
-      >
-        <IoCartOutline className="text-4xl" />
-        <span className="text-xs absolute -top-0 -right-2 rounded-full h-6 w-6 bg-primary-light text-white border  flex justify-center items-center">
-          {cart?.length}
-        </span>
+        >
+          <IoCartOutline className="text-4xl" />
+          <span className="text-xs absolute -top-0 -right-2 rounded-full h-6 w-6 bg-primary-light text-white border  flex justify-center items-center">
+            {cart?.length}
+          </span>
+        </div>
+        <Menu
+          setMenu={setMenu}
+          dropdown={dropdown}
+          setDropdown={setDropdown}
+          menu={menu}
+        />
       </div>
-      <Menu
-        setMenu={setMenu}
-        dropdown={dropdown}
-        setDropdown={setDropdown}
-        menu={menu}
-      />
-      </div>
-      
+
       <AnimatePresence mode="wait">
         {menu && (
           <motion.div
@@ -156,7 +155,9 @@ export const Nav = ({ srollState }) => {
                 }}
                 className="px-10 mb-2 py-2"
               >
-                About
+                <Link className="" to="/About">
+                  About
+                </Link>
               </motion.li>
               <motion.li
                 onClick={() => setMenu(!menu)}
@@ -178,30 +179,11 @@ export const Nav = ({ srollState }) => {
                 }}
                 className="px-10 mb-2 py-2"
               >
-                Videos
+                <Link className="" to="/Videos">
+                  Videos
+                </Link>
               </motion.li>
-              <motion.li
-                onClick={() => setMenu(!menu)}
-                initial={{
-                  x: -20,
-                  opacity: 0,
-                }}
-                animate={{
-                  x: 0,
-                  opacity: 1,
-                }}
-                exit={{
-                  x: -20,
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.7,
-                }}
-                className="px-10 mb-2 py-2"
-              >
-                Teachers
-              </motion.li>
+             
               {!user && (
                 <motion.li
                   onClick={() => setMenu(!menu)}
