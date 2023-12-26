@@ -76,11 +76,11 @@ const Offer = () => {
             delay: 0.5,
             type: 'linear',
           }}
-          className=" h-[50vh] bg-red-300 md:flex-1  md:h-full"
+          className=" h-[50vh] bg-primary-light/50 md:flex-1  md:h-full"
         >
           <img
             className=" rounded-md w-full h-full object-cover"
-            src="/s.jpg"
+            src="/fun.png"
             alt=""
           />
         </motion.div>

@@ -14,18 +14,17 @@ const Popular = () => {
       const newData = []
       querySnapshot.forEach((doc) => {
         console.log(doc.id, ' => ', doc.data())
-        newData.push({ id: doc.id, ...doc.data() }) 
+        newData.push({ id: doc.id, ...doc.data() })
       })
       setData(newData)
     } catch (error) {
       console.log(error)
     }
-  
   }
   useEffect(() => {
     getAllProducts()
   }, [])
-console.log(data)
+  console.log(data)
   return (
     <div className=" w-full py-[20px]  bg-purple-50 mx-auto  min-h-screen">
       <div className="w-[90%] mx-auto ">
@@ -33,7 +32,7 @@ console.log(data)
       </div>
       <div className=" w-[90%] mx-auto mt-4 mb-[50px] flex items-center justify-between">
         <motion.h1 className="text-[35px]   md:w-1/2 leading-[100%] font-[400] md:text-[50px]">
-          Popular Courses
+          New Videos
         </motion.h1>
         <div className="w-fit hidden md:flex h-fit pb-1 border-b-2 border-black">
           <TranslateButton
