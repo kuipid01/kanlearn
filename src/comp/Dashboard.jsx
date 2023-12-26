@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../utils/AuthContext'
 import { Link } from 'react-router-dom'
-import { collection, query, where, getDocs, doc, deleteDoc } from 'firebase/firestore'
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore'
 import { db } from '../../firebase'
+import { Btn } from './Button'
 
 const Dashboard = () => {
   const { user } = useAuth()
@@ -35,35 +43,33 @@ const Dashboard = () => {
     setIdToBeDeleted(id)
     setDeleteBox(true)
   }
-  const confirmDeleteFunction = async()  => {
-   
-    const docRef = doc(db, "videos", idToBeDeleted);
+  const confirmDeleteFunction = async () => {
+    const docRef = doc(db, 'videos', idToBeDeleted)
     try {
-      await deleteDoc(docRef);
+      await deleteDoc(docRef)
       toast.info('Deleted successfully!', {
-        position: "bottom-right",
+        position: 'bottom-right',
         autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
-        });
-    
+        theme: 'light',
+      })
+
       setDeleteBox(false)
     } catch (error) {
       toast.error('An error occured,Try again or contact help!', {
-        position: "bottom-right",
+        position: 'bottom-right',
         autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
-        });
-  
+        theme: 'light',
+      })
     }
   }
   return (
@@ -93,12 +99,21 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="flex mt-[100px]  gap-4 justify-center items-center">
-        <Link
-          to="add"
-          className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-white rounded-[20px]  h-fit p-5"
-        >
-          Add a video
-        </Link>
+        {!user?.emailVerified ? (
+          <button onClick={ () => {
+
+            alert('Verify your account to create a video')
+          }}  className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-red-200 rounded-[20px]  h-fit p-5"> 
+          Add a video</button>
+        ) : (
+          <Link
+            to="add"
+            className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-white rounded-[20px]  h-fit p-5"
+          >
+            Add a video
+          </Link>
+        )}
+
         <Link
           to="edit"
           className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-white rounded-[20px] flex gap-4 justify-center items-center h-fit p-5"
@@ -155,12 +170,22 @@ const Dashboard = () => {
       {deleteBox && (
         <div className=" z-30 w-full h-full fixed top-0 left-0 bg-primary-light flex justify-center items-center">
           <div className="flex capitalize  flex-col text-gray-200 w-fit px-7 py-5 shadow rounded border border-gray-400">
-          <p>Are you sure want to go ahead with the action</p>
+            <p>Are you sure want to go ahead with the action</p>
 
-          <div className='flex mt-6 gap-3 justify-center'>
-            <button onClick={() => confirmDeleteFunction()} className=' bg-red-500 text-white px-3 py-1 transition-all hover:bg-gray-200 border-white rounded'>Yes</button>
-            <button onClick={ () => setDeleteBox(false)} className=' bg-white px-3 py-1  transition-all hover:bg-gray-200 border-white rounded text-primary-light'>No</button>
-          </div>
+            <div className="flex mt-6 gap-3 justify-center">
+              <button
+                onClick={() => confirmDeleteFunction()}
+                className=" bg-red-500 text-white px-3 py-1 transition-all hover:bg-gray-200 border-white rounded"
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => setDeleteBox(false)}
+                className=" bg-white px-3 py-1  transition-all hover:bg-gray-200 border-white rounded text-primary-light"
+              >
+                No
+              </button>
+            </div>
           </div>
         </div>
       )}

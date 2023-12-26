@@ -180,6 +180,16 @@ export const AuthProvider = ({ children }) => {
         progress: undefined,
         theme: "light",
         });
+        toast.success('Check your mail to confirm your account!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       setUser(user);
       navigate("/");
     } catch (error) {
