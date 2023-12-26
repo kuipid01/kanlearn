@@ -70,9 +70,7 @@ const router = createBrowserRouter([
           <>
             <ScrollRestoration />
             <AuthProvider>
-              <PrivateRoutes>
-                <About />
-              </PrivateRoutes>
+              <About />
             </AuthProvider>
           </>
         ),

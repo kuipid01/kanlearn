@@ -101,8 +101,8 @@ const Landingpage = () => {
             type: 'linear',
           }}
         >
-          <h1 className="text-[35px] leading-[100%] font-[400] md:text-[50px]">
-            Get one-on-one tutorials from experts
+          <h1 className="text-[30px] leading-[100%] font-[400] md:text-[40px]">
+          Got videos? Get paid. The marketplace for video creators like you.
           </h1>
         </motion.div>
         <motion.p
@@ -131,9 +131,7 @@ const Landingpage = () => {
           }}
           className="text-[18px] text-gray-900 font-[300]"
         >
-          At Kanlearn, we understand that education is personal. Experience the
-          power of one-on-one tutelage designed to elevate your understanding
-          and accelerate your progress.
+        At Kanlearn, you're not just watching videos, you're joining a dynamic network of minds eager to learn, share, and grow together.
         </motion.p>
         <motion.div
           initial={{
@@ -164,7 +162,8 @@ const Landingpage = () => {
           <Btn
             height={60}
             width={250}
-            text="Explore Tutors"
+            text="Explore Videos"
+            link='Videos'
             bg={true}
             mainpage={true}
           />
@@ -172,6 +171,7 @@ const Landingpage = () => {
             height={60}
             width={250}
             text="About Us"
+            link='About'
             bg={false}
             mainpage={true}
           />

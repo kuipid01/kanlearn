@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export const Btn = ({ text, bg, width, height, mainpage }) => {
+export const Btn = ({ text, bg,link, width, height, mainpage }) => {
   const [animatey, setAnimate] = useState(false);
   return (
     <Link
@@ -10,10 +10,11 @@ export const Btn = ({ text, bg, width, height, mainpage }) => {
         height: height,
         width: width,
       }}
+      
       onMouseEnter={() => setAnimate(true)}
       onMouseLeave={() => setAnimate(false)}
       className={`  relative  transition ease-in-out duration-300  font-[600] uppercase rounded-md flex justify-center items-center border text-[#613f75] border-[#613f75]`}
-      to=""
+      to={link}
     >
       {text}
       <motion.svg
