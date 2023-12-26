@@ -17,6 +17,8 @@ import { Nav } from './Nav'
 import { useAuth } from '../utils/AuthContext'
 import Dashboard from './Dashboard'
 import Landingpage from './Landingpage'
+import Cartpage from '@/pages/Cartpage'
+import { useCart } from '@/utils/CartContext'
 //lg - 50p
 //sm - 20p
 //esm - 15p
@@ -28,6 +30,7 @@ const Home = () => {
   return (
     <div className="relative">
       <Nav srollState={srollState} />
+      
       <div className=" flex flex-col gap-[150px]">
         {!user ? (
           <div className="  min-h-screen h-fit flex justify-center items-center  w-full   ">
@@ -38,10 +41,8 @@ const Home = () => {
         )}
         {!user && <Offer />}
         {!user && <Popular />}
-
-        <Footer />
       </div>
-
+      
       {/* <motion.div
         onMouseEnter={() => setAnimate(true)}
         onMouseLeave={() => setAnimate(false)}
@@ -58,27 +59,27 @@ const Home = () => {
           className=" w-full pointer-events-none h-[90px] opacity-60 absolute top-[-15px] "
         >
           <motion.path
-           
+
             animate={{
               d: `${
                 animatey
                   ? `
-                      
+
                   M0 15
-                  Q${250 / 2} -10 250 15 
+                  Q${250 / 2} -10 250 15
                   L250 80
                   Q${250 / 2} 80 0 80
                   LO 80
-              
+
             `
-                  : ` 
+                  : `
 
                   M0 15
-                  Q${250 / 2} -10 250 15 
+                  Q${250 / 2} -10 250 15
                   L250 80
-                  Q${250 / 2} 100 0 80 
+                  Q${250 / 2} 100 0 80
                   LO 60
-             
+
 
                 `
               }`,
@@ -106,6 +107,7 @@ const Home = () => {
           <div className="w-full  h-[60px] flex justify-center items-center"> text 1 </div>
         </motion.div>
       </div> */}
+          
     </div>
   )
 }

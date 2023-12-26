@@ -5,7 +5,7 @@ import { collection, query, where, getDocs, doc, deleteDoc } from 'firebase/fire
 import { db } from '../../firebase'
 
 const Dashboard = () => {
-  const { user, logoutUser } = useAuth()
+  const { user } = useAuth()
   const [data, setData] = useState([])
   const [idToBeDeleted, setIdToBeDeleted] = useState('')
   const [deleteBox, setDeleteBox] = useState(false)
@@ -92,9 +92,9 @@ const Dashboard = () => {
         </p>
         <div className=" flex gap-3 flex-wrap justify-center items-center">
           {data?.map((item, i) => (
-            <div className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[300px] md:w-1/4">
+            <div className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[400px] md:w-1/4">
               <Link
-                className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[200px] "
+                className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-3/4 "
                 key={item?.id}
                 to={`/course/${item?.id}`}
               >
@@ -106,7 +106,7 @@ const Dashboard = () => {
                 <h1 className="text-base capitalize font-bold text-gray-900">
                   {item?.title}{' '}
                 </h1>
-                <p className="text-sm">{item.desc.slice(0, 100)}</p>
+                <p className="text-sm">{item.desc.slice(0, 100)}....</p>
               </Link>
               {user?.uid === item?.user && (
                 <div className=" w-full gap-3 px-3 py-3 flex justify-between">
@@ -137,8 +137,8 @@ const Dashboard = () => {
           <p>Are you sure want to go ahead with the action</p>
 
           <div className='flex mt-6 gap-3 justify-center'>
-            <button onClick={() => confirmDeleteFunction()} className=' bg-white px-3 py1 transition-all hover:bg-gray-200 border-white rounded text-primary-light'>Yes</button>
-            <button onClick={ () => setDeleteBox(false)} className=' bg-white px-3 py1  transition-all hover:bg-gray-200 border-white rounded text-primary-light'>No</button>
+            <button onClick={() => confirmDeleteFunction()} className=' bg-red-500 text-white px-3 py-1 transition-all hover:bg-gray-200 border-white rounded'>Yes</button>
+            <button onClick={ () => setDeleteBox(false)} className=' bg-white px-3 py-1  transition-all hover:bg-gray-200 border-white rounded text-primary-light'>No</button>
           </div>
           </div>
         </div>

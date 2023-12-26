@@ -6,7 +6,9 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 import Player from '../comp/Player'
 import { useAuth } from '../utils/AuthContext'
+import { useCart } from '@/utils/CartContext'
 const Produt = () => {
+  const { setCart, cart } = useCart()
   const { user } = useAuth()
 
   const { id } = useParams()
@@ -32,6 +34,11 @@ const Produt = () => {
       return null
     }
   }
+  const handleAddToCart = (item) => {
+    console.log('clicked')
+    console.log(item)
+    setCart((prev) => [...cart, item])
+  }
   useEffect(() => {
     getVideoById()
     if (video) {
@@ -40,7 +47,8 @@ const Produt = () => {
       )
     }
   }, [])
-
+  const addedToCart = cart.find((item) => item.id === id)
+  console.log(addedToCart)
   const produtDetails = {
     category: 'Tech',
     subategory: 'React',
@@ -169,20 +177,30 @@ const Produt = () => {
             </h1>
             <span className=" font-extralight line-through">
               {' '}
-              {video?.price}{' '}
+              {video?.newPrice ? video?.price : ''}{' '}
             </span>
             <span className=" font-light">
               {' '}
-              {Math.round(
-                ((video?.price - video?.newPrice) / video?.price) * 100
-              ) || 0}{' '}
+              {(video?.newPrice &&
+                Math.round(
+                  ((video?.price - video?.newPrice) / video?.price) * 100
+                )) ||
+                0}{' '}
               % off{' '}
             </span>
           </div>
-          <button className=" xl:hidden transition-all hover:bg-gray-900/80 bg-gray-900 w-full h-14 mt-3  text-white text-center">
-            {' '}
-            Add To Cart{' '}
-          </button>
+          {addedToCart ? (
+            <button className=" lg:hidden transition-all hover:bg-gray-300/80 bg-gray-300 cursor-not-allowed w-full h-14 mt-3  text-gray-600 text-center">Added To Cart</button>
+          ) : (
+            <button
+              onClick={() => handleAddToCart(video)}
+              className=" lg:hidden transition-all hover:bg-gray-900/80 bg-gray-900 w-full h-14 mt-3  text-white text-center"
+            >
+              {' '}
+              Add To Cart{' '}
+            </button>
+          )}
+         
         </div>
       </div>
       <div className="banner  border-gray-500 flex-col hidden lg:flex absolute right-7 min-h-[500px] pb-4 border-2 shadow-xl w-80 p-1 bg-white top-28">
@@ -200,33 +218,45 @@ const Produt = () => {
           </div>
         </div>
         <div className="p-2 mt-2 flex gap-2 items-center w-full justify-center">
-          <h1 className=" text-4xl font-medium"> #{video?.newPrice} </h1>
-          <span className=" font-extralight line-through">
+          <h1 className=" text-4xl font-medium">
             {' '}
-            {video?.price}{' '}
+            #{video?.newPrice ? video?.newPrice : video?.price}{' '}
+          </h1>
+          <span className=" font-extralight line-through">
+            {video?.newPrice ? '#' + video?.newPrice : ''}
           </span>
           <span className=" font-light">
             {' '}
-            {Math.round(
-              ((video?.price - video?.newPrice) / video?.price) * 100
-            ) || 0}{' '}
-            % off 
+            {(video?.newPrice &&
+              Math.round(
+                ((video?.price - video?.newPrice) / video?.price) * 100
+              )) ||
+              0}{' '}
+            % off
           </span>
         </div>
         {user?.uid === video?.user ? (
           <Link
             className="text-white mt-6 bg-primary-light border py-4 border-white w-full  uppercase text-xl font-bold text-center"
-            to={`edit/${id}`}
+            to={`/edit/${id}`}
           >
             {' '}
             Edit{' '}
           </Link>
         ) : (
           <div className=" w-full p-2 ">
-            <button className=" transition-all hover:bg-primary-light/80 w-full h-11 mt-3 bg-primary-light text-white text-center">
+              {addedToCart ? (
+            <button className=" transition-all hover:bg-gray-500/80 w-full h-11 mt-3 bg-gray-500 text-white text-center">Added To Cart</button>
+          ) : (
+            <button
+              onClick={() => handleAddToCart(video)}
+              className=" transition-all hover:bg-primary-light/80 w-full h-11 mt-3 bg-primary-light text-white text-center"
+            >
               {' '}
               Add To Cart{' '}
             </button>
+          )}
+       
             <button className=" transition-all hover:bg-gray-200 w-full h-11 border border-black mt-3 bg-white  text-black">
               {' '}
               Buy Now{' '}
@@ -272,7 +302,7 @@ const Produt = () => {
               <div className=" w-20 h-full">
                 <img
                   className=" h-full w-full rounded-full object-cover"
-                  src={video?.imageUrl}
+                  src="/s.jpg"
                   alt=""
                 />
               </div>
@@ -308,7 +338,7 @@ const Produt = () => {
         {user?.uid === video?.user ? (
           <Link
             className="text-white border py-2 border-white w-fit px-4 uppercase text-lg font-light text-center"
-            to={`edit/${id}`}
+            to={`/edit/${id}`}
           >
             {' '}
             Edit{' '}

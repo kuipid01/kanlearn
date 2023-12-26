@@ -32,11 +32,15 @@ const Login = () => {
   }
 
   return (
-    <div className="w-full relative rounded-r-3xl bg-primary-light   flex h-screen">
+    <div className="w-full overflow-x-hidden relative rounded-r-3xl bg-primary-light   flex h-screen">
+      <div className="absolute flex  px-5 left-0 top-5  w-full justify-between">
       <AiOutlineArrowLeft
         onClick={() => navigate(-1)}
-        className="absolute cursor-pointer z-30 text-2xl text-gray-700 md:text-gray-50 left-5 top-5"
+        className=" cursor-pointer z-30 text-2xl text-gray-700 md:text-gray-50 "
       />
+      <Link className=" cursor-pointer text-primary-light" to='/'>Home</Link>
+      </div>
+     
       <div className="hidden md:flex w-1/3 relative h-full text-white p-4 ">
         <motion.h1
           variants={textAnim}

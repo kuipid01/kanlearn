@@ -18,20 +18,22 @@ import { AuthProvider, useAuth } from './utils/AuthContext.jsx'
 import Produt from './pages/Produt.jsx'
 import Add from './pages/Add.jsx'
 import { PrivateRoutes } from './comp/Private.jsx'
-import { Toaster } from './@/components/ui/toaster.jsx'
+
 import Edit from './pages/Edit.jsx'
+import Cartpage from './pages/Cartpage.jsx'
+import { CartProvider } from './utils/CartContext.jsx'
 
 const Layout = () => {
-  
   return (
-    <div>
+    <div className=' relative'>
       <ScrollRestoration />
-      <AuthProvider>
-      <Toaster />
-        <Nav />
-        <Outlet />
-        <Footer />
-      </AuthProvider>
+      <CartProvider>
+        <AuthProvider>
+          <Nav />
+          <Outlet />
+          <Footer />
+        </AuthProvider>
+      </CartProvider>
     </div>
   )
 }
@@ -51,9 +53,9 @@ const router = createBrowserRouter([
           <>
             <ScrollRestoration />
             <AuthProvider>
-            <PrivateRoutes >
-              <Add />
-            </PrivateRoutes>
+              <PrivateRoutes>
+                <Add />
+              </PrivateRoutes>
             </AuthProvider>
           </>
         ),
@@ -64,9 +66,20 @@ const router = createBrowserRouter([
           <>
             <ScrollRestoration />
             <AuthProvider>
-            <PrivateRoutes >
-              <Edit />
-            </PrivateRoutes>
+              <PrivateRoutes>
+                <Edit />
+              </PrivateRoutes>
+            </AuthProvider>
+          </>
+        ),
+      },
+      {
+        path: '/cart',
+        element: (
+          <>
+            <ScrollRestoration />
+            <AuthProvider>
+              <Cartpage />
             </AuthProvider>
           </>
         ),
@@ -97,12 +110,15 @@ const router = createBrowserRouter([
     element: (
       <AuthProvider>
         <ScrollRestoration />
+        <CartProvider>
         <Nav />
         <Produt />
+
+        </CartProvider>
+  
       </AuthProvider>
     ),
   },
-
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

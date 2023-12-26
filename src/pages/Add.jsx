@@ -12,11 +12,11 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
-import { useToast } from '@/@/components/ui/use-toast'
+
 
 
 const Add = () => {
-  const { toast } = useToast()
+
   const { user } = useAuth()
   const navigate = useNavigate()
   const perkInputRef = useRef(null)
@@ -90,8 +90,7 @@ const Add = () => {
     storage,
     `videos/${timestamp}_${videoFile && videoFile.name.replace(/\s/g, '')}`
   );
-  
-console.log(thumbnail?.name.replace(/\s/g, ''))
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Check if all fields are filled
@@ -174,10 +173,7 @@ console.log(thumbnail?.name.replace(/\s/g, ''))
          totalTimesRated: 0,
        }) 
       
-      toast({
-        title: "Video Added",
-        description: "Video Added Succesfully.",
-      })
+  
     // Reset form state by creating a new video object
     setVideo({
       title: '',
@@ -198,11 +194,7 @@ console.log(thumbnail?.name.replace(/\s/g, ''))
     setLoading(false);
     } catch (error) {
       setProgress('An error occured,Try again or contact help')
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-      })
+     
       setLoading(false)
       console.error('Error adding video:', error)
     }
@@ -226,9 +218,9 @@ console.log(thumbnail?.name.replace(/\s/g, ''))
   return (
     <div className="page min-h-screen h-fit pb-16 text-black">
       <div className="flex flex-col gap-5 w-5/6 mx-auto">
-        <h1 className="text-2xl">Add Tutorials</h1>
+        <h1 className="text-2xl">Add Video</h1>
         {loading ? (
-          <div className=" flex flex-col justify-center items-center gap-3 h-fit p-5 rounded-md border shadow-lg ">
+          <div className=" flex flex-col justify-center items-center  gap-3 h-screen  p-5 rounded-md border shadow-lg ">
             <p className=" capitalize ">{progress}</p>
             <img
               className="w-12 h-12 rounded-full transition-all"

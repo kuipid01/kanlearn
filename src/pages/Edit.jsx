@@ -12,11 +12,11 @@ import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
-import { useToast } from '@/@/components/ui/use-toast'
+
 import { IoIosClose } from 'react-icons/io'
 
 const Edit = () => {
-  const { toast } = useToast()
+
   const { user } = useAuth()
  
   const [video, setVideo] = useState()
@@ -33,17 +33,7 @@ const Edit = () => {
 
   const [videoFile, setVideoFile] = useState(null)
   const [imageFile, setImageFile] = useState(null)
-  // const [video, setVideo] = useState({
-  //   title: '',
-  //   desc: '',
-  //   price: '',
-  //   longdesc: '',
-  //   imageUrl: '',
-  //   importance: [],
-  //   vidUrl: '',
-  // })
 
-  // console.log(video)
   const getVideoById = async () => {
     try {
       const videoRef = doc(db, 'videos', id)
@@ -92,7 +82,6 @@ const Edit = () => {
     })
   }
 
-  // console.log(video)
 
   const handleThumbnailChange = (e) => {
     const file = e.target.files[0]
@@ -206,9 +195,7 @@ const Edit = () => {
        const videoUrl = await getDownloadURL(videoUploadTask.snapshot.ref)
 
         //Edit video details to Firestore
-       console.log({
-         ...video
-       })
+     
        await updateDoc(docRef, {
          ...video,
          imageUrl: thumbnailUrl,
@@ -219,10 +206,6 @@ const Edit = () => {
          totalTimesRated: 0,
        })
 
-       toast({
-         title: 'Video Edited',
-         description: 'Video Edited Succesfully.',
-       })
        // Reset form state by creating a new video object
        setVideo({
          title: '',
@@ -243,13 +226,9 @@ const Edit = () => {
        setLoading(false)
      } catch (error) {
        setProgress('An error occured,Try again or contact help')
-       toast({
-         variant: 'destructive',
-         title: 'Uh oh! Something went wrong.',
-         description: 'There was a problem with your request.',
-       })
+   
        setLoading(false)
-       console.error('Error adding video:', error)
+   
      }
   }
   const produtDetails = {
@@ -376,7 +355,7 @@ const Edit = () => {
                 onClick={addPerk}
                 className="w-fit px-3 bg-primary-light ml-4 rounded-[10px] text-white"
               >
-                Edit Perk
+                Add Perk
               </button>
             </div>
             {video?.importance?.length > 0 && (

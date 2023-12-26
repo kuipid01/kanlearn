@@ -38,9 +38,9 @@ const Card = ({ item }) => {
       x: 0,
     },
   };
-  const { title, image, category, price, user, average_rating } = item;
+  const { title, imageUrl, category, price,id, user, average_rating } = item;
   return (
-    <Link ref={cardRef} className=' card shadow-md shadow-gray-400 bg-white  h-[500px] p-2 rounded-lg flex flex-col justify-between' to='course/id'>
+    <Link ref={cardRef} className=' card shadow-md shadow-gray-400 bg-white  h-[500px] p-2 rounded-lg flex flex-col justify-between' to={`course/${id}`}>
    
         <motion.img
           variants={imgAnim}
@@ -51,7 +51,7 @@ const Card = ({ item }) => {
 
             type: "linear",
           }}
-          src={image}
+          src={imageUrl}
           className="w-full rounded-lg h-1/2 object-cover"
           alt=""
         />
@@ -66,7 +66,7 @@ const Card = ({ item }) => {
           className="  items-center flex justify-between w-full"
         >
           <div className="py-1 px-2 bg-purple-200  flex items-center gap-2  rounded-lg">
-            <img src={image} className="w-3 h-3 rounded-full" alt="" />
+            <img src={imageUrl} className="w-3 h-3 rounded-full" alt="" />
             <span className="text-purple-500 text-sm font-bold">
               {" "}
               {category}{" "}
@@ -86,7 +86,7 @@ const Card = ({ item }) => {
             type: "linear",
             delay: 0.5,
           }}
-          className=" w-[95%] text-3xl"
+          className=" w-[95%] capitalize text-3xl"
         >
           {title}{" "}
         </motion.h1>

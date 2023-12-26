@@ -3,7 +3,7 @@ import { useAuth } from "../utils/AuthContext"
 
 
 export const PrivateRoutes = ( {children}) => {
-    const {user} = useAuth()
-    console.log(user)
+     const {user} = useAuth()
+  
     return user ? children : <Navigate to="/login"/>
 }
