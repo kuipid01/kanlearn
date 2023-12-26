@@ -50,7 +50,7 @@ const Cartpage = ({ cart, setCart }) => {
         </div>
       ) : (
         <div className=" flex flex-col h-full justify-center items-center gap-3">
-          <img className="w-[290px] h-[290px]" src="/cat.svg" alt="" />{' '}
+          <img className="w-[290px] animate-pulse h-[290px]" src="/cat.svg" alt="" />{' '}
           <h1 className=' capitalize animate-pulse text-xl'>Your cart is empty.</h1>
         </div>
       )}

@@ -173,7 +173,16 @@ const Add = () => {
          totalTimesRated: 0,
        }) 
       
-  
+       toast.success('Video added Successful!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     // Reset form state by creating a new video object
     setVideo({
       title: '',
@@ -193,8 +202,17 @@ const Add = () => {
      navigate('/');
     setLoading(false);
     } catch (error) {
-      setProgress('An error occured,Try again or contact help')
-     
+      setProgress('')
+      toast.error('An error occured,Try again or contact help!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       setLoading(false)
       console.error('Error adding video:', error)
     }

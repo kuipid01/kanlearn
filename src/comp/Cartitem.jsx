@@ -34,11 +34,11 @@ const Cartitem = ({ item, index, removeCartItem }) => {
 
       <div className=" flex mr-6 flex-col justify-between">
         <h1 className=" capitalize">{title}</h1>
-        <p className=" font-bold text-3xl">{` £${price}  `} </p>
+        <p className=" font-bold text-2xl">{` £${price}  `} </p>
       </div>
       <div
         onClick={() => removeCartItem(id)}
-        className=" cursor-pointer absolute top-0 right-0  bg-red-400 w-6 h-6 flex justify-center items-center"
+        className=" cursor-pointer absolute bottom-0 rounded-tl-md right-0  bg-red-500 w-5 h-5 flex justify-center items-center"
       >
         <IoClose className="text-white" />
       </div>

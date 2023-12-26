@@ -6,10 +6,11 @@ import { db } from '../../firebase'
 
 const Dashboard = () => {
   const { user } = useAuth()
+  console.log(user)
   const [data, setData] = useState([])
   const [idToBeDeleted, setIdToBeDeleted] = useState('')
   const [deleteBox, setDeleteBox] = useState(false)
-  console.log(data)
+  // console.log(data)
   const getDoc = async () => {
     try {
       const q = query(collection(db, 'videos'), where('user', '==', user.uid))
@@ -39,10 +40,30 @@ const Dashboard = () => {
     const docRef = doc(db, "videos", idToBeDeleted);
     try {
       await deleteDoc(docRef);
-      alert('Deleted successfully')
+      toast.info('Deleted successfully!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    
       setDeleteBox(false)
     } catch (error) {
-      alert('An error occured try agaian')
+      toast.error('An error occured,Try again or contact help!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+  
     }
   }
   return (

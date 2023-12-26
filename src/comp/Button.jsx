@@ -51,7 +51,8 @@ export const Btn = ({ text, bg, width, height, mainpage }) => {
 };
 export const TranslateButton = ({ text, width, height, img }) => {
   return (
-    <div
+    <Link 
+    to={ text === 'Home' ? '/' : text }
       style={{
         width: width,
         height: height,
@@ -84,6 +85,6 @@ export const TranslateButton = ({ text, width, height, img }) => {
           {text} <img src={img} alt="" />
         </div>
       </motion.div>
-    </div>
+    </Link>
   );
 };

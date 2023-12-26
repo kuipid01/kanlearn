@@ -35,8 +35,7 @@ export const Nav = ({ srollState }) => {
 
         <TranslateButton text="Videos" width={100} height={40} />
 
-        <TranslateButton text="Teachers" width={100} height={40} />
-      </div>
+        </div>
     
       <div className="hidden lg:flex  gap-5  uppercase">
         {!user ? (

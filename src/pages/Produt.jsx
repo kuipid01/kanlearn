@@ -7,6 +7,7 @@ import { db } from '../../firebase'
 import Player from '../comp/Player'
 import { useAuth } from '../utils/AuthContext'
 import { useCart } from '@/utils/CartContext'
+import { toast } from 'react-toastify'
 const Produt = () => {
   const { setCart, cart } = useCart()
   const { user } = useAuth()
@@ -35,9 +36,18 @@ const Produt = () => {
     }
   }
   const handleAddToCart = (item) => {
-    console.log('clicked')
-    console.log(item)
+   
     setCart((prev) => [...cart, item])
+    toast.success('Added to cart!', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
   useEffect(() => {
     getVideoById()

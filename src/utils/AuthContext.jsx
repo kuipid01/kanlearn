@@ -1,17 +1,18 @@
 // Import necessary modules and functions
 import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, sendEmailVerification, signInWithPopup } from "firebase/auth";
 import {
   getAuth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
+  signOut,sendSignInLinkToEmail 
 } from "firebase/auth";
 import { collection, addDoc, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { app, db } from "../../firebase";
 import Spin from "../comp/spinner/Spin";
+import { toast } from "react-toastify";
 
 // Create a context for authentication
 const AuthContext = createContext();
@@ -51,10 +52,30 @@ export const AuthProvider = ({ children }) => {
       const user = userCredential.user;
       setUser(user);
       setLoading(false)
+      toast.success('Login Successful!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       navigate("/");
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      toast.error('An error occured,Try again!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
@@ -106,8 +127,27 @@ export const AuthProvider = ({ children }) => {
       await signOut(auth);
       setUser(null);
       navigate("/");
+      toast.success('Logout Successful!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     } catch (error) {
-      console.log(error);
+      toast.error('An error occured,Try again!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
@@ -123,18 +163,36 @@ export const AuthProvider = ({ children }) => {
         password
       );
       const user = userCredential.user;
-
+      await sendEmailVerification(user);
       // Add user data to Firestore collection
       const docRef = await addDoc(collection(db, "users"), {
         email,
         name,
         userId: user.uid,
       });
-
+      toast.success('Registration Successful!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       setUser(user);
       navigate("/");
     } catch (error) {
-      console.error(error);
+      toast.error('An error occured,Try again!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
@@ -22,11 +23,14 @@ import { PrivateRoutes } from './comp/Private.jsx'
 import Edit from './pages/Edit.jsx'
 import Cartpage from './pages/Cartpage.jsx'
 import { CartProvider } from './utils/CartContext.jsx'
+import About from './pages/About.jsx'
+import Videos from './pages/Videos.jsx'
 
 const Layout = () => {
   return (
-    <div className=' relative'>
+    <div className=" relative">
       <ScrollRestoration />
+
       <CartProvider>
         <AuthProvider>
           <Nav />
@@ -55,6 +59,32 @@ const router = createBrowserRouter([
             <AuthProvider>
               <PrivateRoutes>
                 <Add />
+              </PrivateRoutes>
+            </AuthProvider>
+          </>
+        ),
+      },
+      {
+        path: '/About',
+        element: (
+          <>
+            <ScrollRestoration />
+            <AuthProvider>
+              <PrivateRoutes>
+                <About />
+              </PrivateRoutes>
+            </AuthProvider>
+          </>
+        ),
+      },
+      {
+        path: '/Videos',
+        element: (
+          <>
+            <ScrollRestoration />
+            <AuthProvider>
+              <PrivateRoutes>
+                <Videos />
               </PrivateRoutes>
             </AuthProvider>
           </>
@@ -111,11 +141,9 @@ const router = createBrowserRouter([
       <AuthProvider>
         <ScrollRestoration />
         <CartProvider>
-        <Nav />
-        <Produt />
-
+          <Nav />
+          <Produt />
         </CartProvider>
-  
       </AuthProvider>
     ),
   },
@@ -123,6 +151,18 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     <RouterProvider router={router} />
   </React.StrictMode>
 )
