@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { Btn } from './Button'
+import Popular from './Popular'
 
 const Dashboard = () => {
   const { user } = useAuth()
@@ -100,11 +101,14 @@ const Dashboard = () => {
       </div>
       <div className="flex mt-[100px]  gap-4 justify-center items-center">
         {!user?.emailVerified ? (
-          <button onClick={ () => {
-
-            alert('Verify your account to create a video')
-          }}  className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-red-200 rounded-[20px]  h-fit p-5"> 
-          Add a video</button>
+          <button
+            onClick={() => {
+              alert('Verify your account to create a video')
+            }}
+            className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-red-200 rounded-[20px]  h-fit p-5"
+          >
+            Add a video
+          </button>
         ) : (
           <Link
             to="add"
@@ -122,49 +126,70 @@ const Dashboard = () => {
         </Link>
       </div>
       <div className="w-[90%] mx-auto my-[100px]">
-        <h1 className=" text-2xl">Your Uploads</h1>
+        <h1 className="text-[35px]   md:w-1/2 leading-[100%] font-[400] md:text-[50px]">
+          Your Videos
+        </h1>
         <p className="mt-5 uppercase border border-primary-light w-fit p-2 rounded-lg bg-primary-light text-white font-bold mb-5">
           Videos Uploaded : {data.length}
         </p>
         <div className=" flex gap-3 flex-wrap justify-center items-center">
-          {data?.map((item, i) => (
-            <div className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[400px] md:w-1/4">
-              <Link
-                className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-3/4 "
-                key={item?.id}
-                to={`/course/${item?.id}`}
-              >
-                <img
-                  className="h-[150px] w-full object-cover "
-                  src={item?.imageUrl}
-                  alt=""
-                />
-                <h1 className="text-base capitalize font-bold text-gray-900">
-                  {item?.title}{' '}
-                </h1>
-                <p className="text-sm">{item.desc.slice(0, 100)}....</p>
-              </Link>
-              {user?.uid === item?.user && (
-                <div className=" w-full gap-3 px-3 py-3 flex justify-between">
-                  <Link
-                    className=" flex-1 text-center flex justify-center items-center h-[30px] bg-primary-light text-white rounded-[10px] shadow"
-                    to={`/edit/${item.id}`}
-                  >
-                    Edit
-                  </Link>
+          {data.length > 0 ? (
+            data?.map((item, i) => (
+              <div className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[400px] md:w-1/4">
+                <Link
+                  className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-3/4 "
+                  key={item?.id}
+                  to={`/course/${item?.id}`}
+                >
+                  <img
+                    className="h-[150px] w-full object-cover "
+                    src={item?.imageUrl}
+                    alt=""
+                  />
+                  <h1 className="text-base capitalize font-bold text-gray-900">
+                    {item?.title}{' '}
+                  </h1>
+                  <p className="text-sm">{item.desc.slice(0, 100)}....</p>
+                </Link>
+                {user?.uid === item?.user && (
+                  <div className=" w-full gap-3 px-3 py-3 flex justify-between">
+                    <Link
+                      className=" flex-1 text-center flex justify-center items-center h-[30px] bg-primary-light text-white rounded-[10px] shadow"
+                      to={`/edit/${item.id}`}
+                    >
+                      Edit
+                    </Link>
 
-                  <button
-                    onClick={() => handleDelete(item?.id)}
-                    className=" flex-1 h-[30px] bg-red-500 text-white rounded-[10px] shadow"
-                  >
-                    Del
-                  </button>
-                </div>
-              )}
-            </div>
-          ))}
+                    <button
+                      onClick={() => handleDelete(item?.id)}
+                      className=" flex-1 h-[30px] bg-red-500 text-white rounded-[10px] shadow"
+                    >
+                      Del
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : !user?.emailVerified ? (
+            <button
+              onClick={() => {
+                alert('Verify your account to create a video')
+              }}
+              className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-red-200 rounded-[20px]  h-fit p-5"
+            >
+              Add a video
+            </button>
+          ) : (
+            <Link
+              to="add"
+              className=" uppercase cursor-pointer border shadow-xl border-gray-300 font-medium w-fit bg-white rounded-[20px]  h-fit p-5"
+            >
+              Add a video
+            </Link>
+          )}
         </div>
       </div>
+      <Popular />
       {}
 
       {deleteBox && (

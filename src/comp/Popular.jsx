@@ -28,7 +28,7 @@ const Popular = () => {
   return (
     <div className=" w-full py-[20px]  bg-purple-50 mx-auto  min-h-screen">
       <div className="w-[90%] mx-auto ">
-        <small className=" uppercase font-medium">courses</small>
+        <small className=" uppercase font-medium">videos</small>
       </div>
       <div className=" w-[90%] mx-auto mt-4 mb-[50px] flex items-center justify-between">
         <motion.h1 className="text-[35px]   md:w-1/2 leading-[100%] font-[400] md:text-[50px]">
@@ -38,7 +38,7 @@ const Popular = () => {
           <TranslateButton
             width={250}
             height={30}
-            text={'Check out popular courses'}
+            text={'Check out new videos'}
             img="/arrow.svg"
           />
         </div>
