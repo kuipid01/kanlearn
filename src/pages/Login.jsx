@@ -28,17 +28,23 @@ const Login = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    const email = loginForm.current.email.value
-    const password = loginForm.current.password.value
+    try {
+      const email = loginForm.current.email.value
+      const password = loginForm.current.password.value
+      if (!email || !password) {
+        alert('Youve not filled some necesaary details,fix up ')
+        return
+      }
+      const userInfo = { email, password }
 
-    const userInfo = { email, password }
-
-    loginUser(userInfo)
+      loginUser(userInfo)
+    } catch (error) {
+      alert('An error occured')
+    }
   }
 
   return (
     <div className="w-full overflow-x-hidden relative rounded-r-3xl bg-primary-light   flex h-screen">
-    
       <div className="absolute flex  px-5 left-0 top-5  w-full justify-between">
         <AiOutlineArrowLeft
           onClick={() => navigate(-1)}

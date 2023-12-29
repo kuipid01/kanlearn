@@ -5,9 +5,16 @@ import { motion } from 'framer-motion'
 import { IoClose } from 'react-icons/io5'
 const Cartpage = ({ cart, setCart }) => {
   const removeCartItem = (id) => {
-    const newCart = cart.filter((item) => item.id !== id)
-    setCart(newCart)
-  }
+    // Create a new cart array excluding the item with the specified id
+    const newCart = cart.filter((item) => item.id !== id);
+  
+    // Update the cart state
+    setCart(newCart);
+  
+    // Update the local storage
+    localStorage.setItem('CART', JSON.stringify(newCart));
+  };
+  
   const {  setCartOpen } = useCart()
   return (
     <motion.div

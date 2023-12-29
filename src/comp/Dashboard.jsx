@@ -15,7 +15,7 @@ import Popular from './Popular'
 
 const Dashboard = () => {
   const { user } = useAuth()
-  console.log(user)
+  // console.log(user)
   const [data, setData] = useState([])
   const [idToBeDeleted, setIdToBeDeleted] = useState('')
   const [deleteBox, setDeleteBox] = useState(false)
@@ -135,10 +135,10 @@ const Dashboard = () => {
         <div className=" flex gap-3 flex-wrap justify-center items-center">
           {data.length > 0 ? (
             data?.map((item, i) => (
-              <div className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[400px] md:w-1/4">
+              <div   key={item?.id}  className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[450px] md:w-1/4">
                 <Link
-                  className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-3/4 "
-                  key={item?.id}
+                  className=" hover:bg-gray-100 transition-all hover:scale-[0.99] w-full  gap-3 p-5 flex flex-col border  shadow rounded-lg shadow-primary-light h-[90%] "
+                
                   to={`/course/${item?.id}`}
                 >
                   <img
@@ -149,10 +149,10 @@ const Dashboard = () => {
                   <h1 className="text-base capitalize font-bold text-gray-900">
                     {item?.title}{' '}
                   </h1>
-                  <p className="text-sm">{item.desc.slice(0, 100)}....</p>
+                  <p className="text-sm">{item.desc.slice(0, 80)}....</p>
                 </Link>
                 {user?.uid === item?.user && (
-                  <div className=" w-full gap-3 px-3 py-3 flex justify-between">
+                  <div className=" w-full h-[10%] items-center gap-3 px-3 py-3  flex justify-between">
                     <Link
                       className=" flex-1 text-center flex justify-center items-center h-[30px] bg-primary-light text-white rounded-[10px] shadow"
                       to={`/edit/${item.id}`}

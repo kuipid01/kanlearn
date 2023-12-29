@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { CiCircleCheck } from 'react-icons/ci'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 import Player from '../comp/Player'
@@ -11,11 +11,11 @@ import { toast } from 'react-toastify'
 const Produt = () => {
   const { setCart, cart } = useCart()
   const { user } = useAuth()
-
+  const navigate = useNavigate()
   const { id } = useParams()
   const [video, setvideo] = useState()
   const [playing, setPlaying] = useState(false)
-
+console.log(cart)
   const getVideoById = async () => {
     try {
       const videoRef = doc(db, 'videos', id)
@@ -23,7 +23,7 @@ const Produt = () => {
 
       if (videoSnapshot.exists()) {
         const videoData = { id: videoSnapshot.id, ...videoSnapshot.data() }
-        console.log('Video Data:', videoData)
+        // console.log('Video Data:', videoData)
         setvideo(videoData)
         return videoData
       } else {
@@ -36,8 +36,21 @@ const Produt = () => {
     }
   }
   const handleAddToCart = (item) => {
-   
-    setCart((prev) => [...cart, item])
+    const addedToCart = cart?.find((cartItem) => cartItem.id === item.id);
+  
+    if (addedToCart) {
+      console.log('Item is already in the cart:', addedToCart);
+      return;
+    }
+  
+    // Use the callback form of setCart to ensure the updated value is used
+    setCart((prevCart) => {
+      const newCart = [...prevCart, item];
+      
+      localStorage.setItem('CART', JSON.stringify(newCart));
+      return newCart
+    });
+  
     toast.success('Added to cart!', {
       position: "bottom-right",
       autoClose: 5000,
@@ -47,8 +60,9 @@ const Produt = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
-  }
+    });
+  };
+  
   useEffect(() => {
     getVideoById()
     if (video) {
@@ -57,8 +71,8 @@ const Produt = () => {
       )
     }
   }, [])
-  const addedToCart = cart.find((item) => item.id === id)
-  console.log(addedToCart)
+  const addedToCart = cart?.find((item) => item.id === id)
+
   const produtDetails = {
     category: 'Tech',
     subategory: 'React',
@@ -87,7 +101,26 @@ const Produt = () => {
     width: `calc(50% - 10px)`,
     // Add other inline styles as needed
   }
-
+  const handleBuy = (item) => {
+    setCart((prevCart) => {
+      const addedToCart = prevCart.find((cartItem) => cartItem.id === item.id);
+  
+      if (addedToCart) {
+        console.log('Item is already in the cart:', addedToCart);
+        navigate('/payment');
+        return prevCart; // Return the current cart unchanged
+      }
+  
+      // If the item is not in the cart, add it
+      const updatedCart = [...prevCart, item];
+      localStorage.setItem('CART', JSON.stringify(updatedCart)); // Corrected line
+      console.log('Updated Cart:', updatedCart);
+      navigate('/payment');
+      return updatedCart;
+    });
+  };
+  
+  
   return (
     <div className="page relative pb-[12vh] min-h-screen">
       <div className=" flex  mt-2 justify-center flex-col gap-2 w-full p-4 h-fit min-h-[50vh] bg-primary-light text-white">
@@ -267,7 +300,7 @@ const Produt = () => {
             </button>
           )}
        
-            <button className=" transition-all hover:bg-gray-200 w-full h-11 border border-black mt-3 bg-white  text-black">
+            <button onClick={() => handleBuy(video)} className=" transition-all hover:bg-gray-200 w-full h-11 border border-black mt-3 bg-white  text-black">
               {' '}
               Buy Now{' '}
             </button>
@@ -365,7 +398,7 @@ const Produt = () => {
                 {video?.price || 'Free'}{' '}
               </p>
             </div>
-            <button className="flex-1 font-bold sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
+            <button onClick={() => handleBuy(video)} className="flex-1 font-bold sm:flex-0 h-4/5 relative transition-all hover:bg-gray-200 w-fit px-2 border rounded bg-white  text-black">
               {' '}
               Buy Now{' '}
             </button>

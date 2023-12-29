@@ -34,7 +34,7 @@ const Cartitem = ({ item, index, removeCartItem }) => {
 
       <div className=" flex mr-6 flex-col justify-between">
         <h1 className=" capitalize">{title}</h1>
-        <p className=" font-bold text-2xl">{` £${price}  `} </p>
+        <p className=" font-bold text-lg md:text-2xl">{` #${price}  `} </p>
       </div>
       <div
         onClick={() => removeCartItem(id)}

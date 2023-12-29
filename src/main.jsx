@@ -25,6 +25,7 @@ import Cartpage from './pages/Cartpage.jsx'
 import { CartProvider } from './utils/CartContext.jsx'
 import About from './pages/About.jsx'
 import Videos from './pages/Videos.jsx'
+import Payment from './pages/Payment.jsx'
 
 const Layout = () => {
   return (
@@ -83,6 +84,19 @@ const router = createBrowserRouter([
             <AuthProvider>
               <PrivateRoutes>
                 <Videos />
+              </PrivateRoutes>
+            </AuthProvider>
+          </>
+        ),
+      },
+      {
+        path: '/payment',
+        element: (
+          <>
+            <ScrollRestoration />
+            <AuthProvider>
+              <PrivateRoutes>
+                <Payment />
               </PrivateRoutes>
             </AuthProvider>
           </>

@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }) => {
         progress: undefined,
         theme: "light",
         });
+        setLoading(false)
     }
   };
 

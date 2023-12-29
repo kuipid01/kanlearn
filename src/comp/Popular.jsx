@@ -13,7 +13,7 @@ const Popular = () => {
       const querySnapshot = await getDocs(collection(db, 'videos'))
       const newData = []
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data())
+        // console.log(doc.id, ' => ', doc.data())
         newData.push({ id: doc.id, ...doc.data() })
       })
       setData(newData)
@@ -24,7 +24,7 @@ const Popular = () => {
   useEffect(() => {
     getAllProducts()
   }, [])
-  console.log(data)
+  // console.log(data)
   return (
     <div className=" w-full py-[20px]  bg-purple-50 mx-auto  min-h-screen">
       <div className="w-[90%] mx-auto ">
