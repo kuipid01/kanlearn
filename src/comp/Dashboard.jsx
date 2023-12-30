@@ -12,6 +12,7 @@ import {
 import { db } from '../../firebase'
 import { Btn } from './Button'
 import Popular from './Popular'
+import { toast } from 'react-toastify'
 
 const Dashboard = () => {
   const { user } = useAuth()
@@ -50,7 +51,7 @@ const Dashboard = () => {
       await deleteDoc(docRef)
       toast.info('Deleted successfully!', {
         position: 'bottom-right',
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,

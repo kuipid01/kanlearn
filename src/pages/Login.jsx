@@ -50,7 +50,7 @@ const Login = () => {
           onClick={() => navigate(-1)}
           className=" cursor-pointer z-30 text-2xl text-gray-700 md:text-gray-50 "
         />
-        <Link className=" cursor-pointer text-primary-light" to="/">
+        <Link className=" cursor-pointer bg-primary-light border px-3 py-1 rounded text-white" to="/">
           Home
         </Link>
       </div>
