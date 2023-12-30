@@ -3,6 +3,7 @@ import { useCart } from '@/utils/CartContext'
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { IoClose } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 const Cartpage = ({ cart, setCart }) => {
   const removeCartItem = (id) => {
     // Create a new cart array excluding the item with the specified id
@@ -43,7 +44,7 @@ const Cartpage = ({ cart, setCart }) => {
         <IoClose className="text-white" />
       </div>
       {cart.length > 0 ? (
-        <div className=" w-full relative h-fit ">
+        <div className=" w-full flex flex-col justify-between relative h-fit ">
           <div className="relative h-fit w-full flex flex-col gap-[20px]">
             {cart?.map((item, i) => (
               <Cartitem
@@ -53,6 +54,7 @@ const Cartpage = ({ cart, setCart }) => {
                 item={item}
               />
             ))}
+            <Link onClick={() => setCartOpen(false)} className=' w-full py-3 flex justify-center items-center mt-10 bg-primary-light  text-white' to='/payment'>Go To Payment Page</Link>
           </div>
         </div>
       ) : (

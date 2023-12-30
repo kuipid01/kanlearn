@@ -12,6 +12,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
+import { toast } from 'react-toastify'
 
 
 
@@ -36,6 +37,7 @@ const Add = () => {
     imageUrl: '',
     importance: [],
     vidUrl: '',
+    videoLink:''
   })
 
   const addPerk = () => {
@@ -97,6 +99,7 @@ const Add = () => {
     if (
       video.desc === '' ||
       video.title === '' ||
+      video.videoLink === '' ||
       video.importance.length <= 0 ||
       videoFile === null ||
       thumbnail === null
@@ -192,6 +195,7 @@ const Add = () => {
       imageUrl: '',
       importance: [],
       vidUrl: '',
+      videoLink:''
     });
     setPerks([]);
     setThumbnail(null);
@@ -257,6 +261,13 @@ const Add = () => {
               placeholder="Enter Video Title"
               onChange={(e) => setVideo({ ...video, title: e.target.value })}
               className="w-full outline-primary-light p-3 border border-gray-400 rounded-[10px]"
+              type="text"
+            />
+             <input
+              value={video.videoLink}
+              onChange={(e) => setVideo({ ...video, videoLink: e.target.value })}
+              placeholder="Enter Link to video to be sold"
+              className="w-full p-3 border outline-primary-light border-gray-400 rounded-[10px]"
               type="text"
             />
             <input

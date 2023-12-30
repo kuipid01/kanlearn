@@ -2,16 +2,20 @@ import React, { useRef, useState } from 'react'
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3'
 import { useAuth } from '@/utils/AuthContext'
 import { useCart } from '@/utils/CartContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import emailjs from '@emailjs/browser'
 import Spin from '@/comp/spinner/Spin'
 const Payment = () => {
   const { user } = useAuth()
-  const { cart } = useCart()
+  const { cart,setCart } = useCart()
   const [loading, setloading] = useState(false)
   const { email, displayName, username } = user
   const { subTotal } = useCart()
-  console.log(subTotal)
+  // Your array of objects
+const navigate = useNavigate()
+  const newArray = cart?.map((obj) => obj.videoLink)
+  console.log(newArray)
+
   const config = {
     public_key: 'FLWPUBK_TEST-cf4564e4f7931f5cc9f23aa36942617c-X',
     tx_ref: Date.now(),
@@ -41,11 +45,13 @@ const Payment = () => {
     const templateParams = {
       email: email,
       displayName: displayName || username,
-      subtotal: subTotal || '', // Make sure to provide a default value if subtotal is undefined
+      subTotal: subTotal || '',
+      from_name: 'Kanlearn',
+      newArray: newArray.join('\n'), // Use '\n' for line breaks in the email template
     }
 
     emailjs
-      .sendForm(serviceId, templateId, myForm.current, publicKey)
+      .send(serviceId, templateId, templateParams, publicKey)
       .then((result) => {
         setloading(false)
         console.log(result.text)
@@ -54,7 +60,6 @@ const Payment = () => {
         setloading(false)
         console.log(error.text)
       })
-
   }
 
   const handleFlutterPayment = useFlutterwave(config)
@@ -71,7 +76,7 @@ const Payment = () => {
       onClose: () => {},
     })
   }
-  if(loading) return <Spin/>
+  if (loading) return <Spin />
   return (
     <div className=" min-h-screen bg-primary-light flex justify-center items-center page">
       <div className=" bg-purple-100 gap-2 rounded-md flex w-1/2  shadow-lg p-3 border flex-col  text-black">
@@ -102,12 +107,16 @@ const Payment = () => {
               type="hidden"
               name="displayName"
               value={displayName ? displayName : username}
-
             />
             <input type="hidden" name="subTotal" value={subTotal || '0'} />
-            <input type="hidden" name="from_name" value='Kanlearn' />
+            <input type="hidden" name="from_name" value="Kanlearn" />
+            <input type="hidden" name="videoLink" value={newArray} />
             <button
-              onClick={sendEmail}
+              onClick={() => {
+                navigate('/orderConfirm')
+                setCart([])
+                sendEmail()
+              }}
               className="w-full  py-3 bg-primary-light text-white"
             >
               Receive Video

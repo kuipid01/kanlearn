@@ -26,6 +26,7 @@ import { CartProvider } from './utils/CartContext.jsx'
 import About from './pages/About.jsx'
 import Videos from './pages/Videos.jsx'
 import Payment from './pages/Payment.jsx'
+import OrderConfirm from './pages/OrderConfirm.jsx'
 
 const Layout = () => {
   return (
@@ -97,6 +98,19 @@ const router = createBrowserRouter([
             <AuthProvider>
               <PrivateRoutes>
                 <Payment />
+              </PrivateRoutes>
+            </AuthProvider>
+          </>
+        ),
+      },
+      {
+        path: '/orderConfirm',
+        element: (
+          <>
+            <ScrollRestoration />
+            <AuthProvider>
+              <PrivateRoutes>
+                <OrderConfirm />
               </PrivateRoutes>
             </AuthProvider>
           </>
