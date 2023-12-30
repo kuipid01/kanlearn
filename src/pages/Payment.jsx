@@ -17,7 +17,7 @@ const navigate = useNavigate()
   console.log(newArray)
 
   const config = {
-    public_key: 'FLWPUBK_TEST-cf4564e4f7931f5cc9f23aa36942617c-X',
+    public_key: 'FLWPUBK-0a0d42c8c53c8916bdc42fab2ed7067d-X',
     tx_ref: Date.now(),
     amount: subTotal,
     currency: 'NGN',

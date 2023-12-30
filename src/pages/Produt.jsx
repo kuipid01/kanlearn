@@ -103,7 +103,7 @@ console.log(cart)
   }
   const handleBuy = (item) => {
     setCart((prevCart) => {
-      const addedToCart = prevCart.find((cartItem) => cartItem.id === item.id);
+      const addedToCart = prevCart?.find((cartItem) => cartItem?.id === item?.id);
   
       if (addedToCart) {
         console.log('Item is already in the cart:', addedToCart);
